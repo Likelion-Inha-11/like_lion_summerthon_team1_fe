@@ -99,7 +99,7 @@ const SignupPage = (props) => {
 
       <InputBox>
         <NicknameBox>
-          <NicknameText>닉네임 입력</NicknameText>
+          <NicknameText>닉네임 입력!!</NicknameText>
           <NicknameInput></NicknameInput>
         </NicknameBox>
         <IdBox></IdBox>
