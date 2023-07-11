@@ -7,8 +7,10 @@ const ChatPage = () => {
       .get("/chat/")
       .then((response) => {
         // 채팅 성공 처리
+        console.log("성공!!");
       })
       .catch((error) => {
+        console.log("에러!!");
         // 오류 처리
       });
   };
