@@ -16,7 +16,10 @@ const ChatPage = () => {
 
     ws.onmessage = (event) => {
       const message = JSON.parse(event.data);
-      setChatLog((chatLog) => [...chatLog, { text: message, sender: "Other" }]); // 채팅 메시지가 도착하면 채팅 로그에 추가
+      setChatLog((chatLog) => [
+        ...chatLog,
+        { text: message.text, sender: message.sender },
+      ]); // 채팅 메시지가 도착하면 채팅 로그에 추가
     };
 
     ws.onclose = () => {
@@ -30,7 +33,7 @@ const ChatPage = () => {
   const handleChat = (event) => {
     event.preventDefault(); // 폼의 기본 제출 동작을 막음
     if (ws) {
-      ws.send(message); // WebSocket을 통해 채팅 메시지를 전송
+      ws.send(JSON.stringify({ text: message, sender: "Me" })); // WebSocket을 통해 채팅 메시지를 전송
       setChatLog((chatLog) => [...chatLog, { text: message, sender: "Me" }]); // 즉시 chatLog에 메시지 추가
       setMessage(""); // 메시지 전송 후 입력 필드를 비움
     }
@@ -54,8 +57,8 @@ const ChatPage = () => {
         <button type="submit">Send Message</button> // 버튼 클릭 시 handleChat
         함수 호출
       </form>
-      <Link to="http://127.0.0.1:8000/chat/">Go Back</Link> // 이전 페이지로
-      돌아가는 링크
+      <Link to="http://localhost:3000/">Go Back</Link> // 이전 페이지로 돌아가는
+      링크
     </>
   );
 };
