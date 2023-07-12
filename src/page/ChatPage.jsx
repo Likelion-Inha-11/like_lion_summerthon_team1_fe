@@ -15,7 +15,8 @@ const ChatPage = () => {
     };
 
     ws.onmessage = (event) => {
-      setChatLog((chatLog) => [...chatLog, event.data]); // 채팅 메시지가 도착하면 채팅 로그에 추가
+      const message = JSON.parse(event.data);
+      setChatLog((chatLog) => [...chatLog, { text: message, sender: "Other" }]); // 채팅 메시지가 도착하면 채팅 로그에 추가
     };
 
     ws.onclose = () => {
@@ -30,7 +31,7 @@ const ChatPage = () => {
     event.preventDefault(); // 폼의 기본 제출 동작을 막음
     if (ws) {
       ws.send(message); // WebSocket을 통해 채팅 메시지를 전송
-      setChatLog((chatLog) => [...chatLog, message]); // 메시지를 chatLog에 추가
+      setChatLog((chatLog) => [...chatLog, { text: message, sender: "Me" }]); // 즉시 chatLog에 메시지 추가
       setMessage(""); // 메시지 전송 후 입력 필드를 비움
     }
   };
@@ -39,7 +40,9 @@ const ChatPage = () => {
     <>
       <ul>
         {chatLog.map((msg, idx) => (
-          <li key={idx}>{msg}</li> // 채팅 로그를 화면에 출력
+          <li key={idx}>
+            {msg.sender}: {msg.text}
+          </li> // 채팅 로그를 화면에 출력
         ))}
       </ul>
       <form onSubmit={handleChat}>
