@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHome, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 library.add(faHome, faSearch, faUser);
 
@@ -61,6 +62,7 @@ const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState(""); // 검색어를 저장하기 위한 useState
   const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 useState
   const [suggestions, setSuggestions] = useState([]); // 자동완성 결과를 출력하기 위한 useState
+  const [roomList, setRoomList] = useState([]); // 방 이름 목록을 저장하기 위한 useState
 
   const handleInputChange = (e) => { // 검색어를 저장하는 함수
     const {value} = e.target;
@@ -83,26 +85,22 @@ const SearchBar = ({ onSearch }) => {
     }
   };
 
-  const data = [ // search 할 예시 데이터, 추후에 api 연동하면서 수정할 것
-  { id: 1, name: "악귀" },
-  { id: 2, name: "킹더랜드" },
-  { id: 3, name: "하트시그널 4" },
-  { id: 4, name: "환승연애2" },
-  { id: 5, name: "마당이 있는 집" },
-  { id: 6, name: "이번 생도 잘 부탁해" },
-  { id: 7, name: "이로운 사기" },
-  { id: 8, name: "도깨비" },
-  { id: 9, name: "이상한 이야기1" },
-  { id : 10, name: "환승연애1" },
-  { id : 11, name: "하트시그널 3" },
-  { id : 12, name: "하트시그널 2" }
-];
+  useEffect(()=>{
+    axios
+        .get(`https://soozzang.p-e.kr/room_list_create/`)
+        .then((res)=>{
+            setRoomList(res.data);
+        })
+        .catch((e)=>{
+            console.log(e);
+        })
+},[suggestions]);
 
   const getSuggestions = (value) => {
     // 검색어 자동 완성 결과를 가져오는 로직을 구현합니다.
     // 예시: 데이터는 배열 형태로 가정하고, 배열 요소 중에 입력된 검색어를 포함하는 항목들을 추출하여 반환합니다.
 
-    const filteredSuggestions = data.filter((item) => // filter로 true인 요소들만 results에 저장
+    const filteredSuggestions = roomList.filter((item) => // filter로 true인 요소들만 results에 저장
       item.name.includes(value) // item.name이 query의 내용을 포함하고 있는지 true/false로 리턴
     );
     return filteredSuggestions;
@@ -110,7 +108,7 @@ const SearchBar = ({ onSearch }) => {
 
   const searchData = (query) => { // query에 담긴 용어 기준으로 검색한 결과 리턴
 
-    const results = data.filter((item) => // filter로 true인 요소들만 results에 저장
+    const results = roomList.filter((item) => // filter로 true인 요소들만 results에 저장
       item.name.includes(query) // item.name이 query의 내용을 포함하고 있는지 true/false로 리턴
     );
 
@@ -131,7 +129,7 @@ const SearchBar = ({ onSearch }) => {
                   <AutoSearchData key={suggestion.id} 
                   onClick={() => handleSelectSuggestion(suggestion)}
                   >
-                  <a href="#">{suggestion.name}</a>
+                  {suggestion.name}
                 </AutoSearchData>
                 ))}
               </AutoSearchWrap>
@@ -154,5 +152,3 @@ const SearchBar = ({ onSearch }) => {
 };
 
 export default SearchBar;
-
-
