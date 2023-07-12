@@ -30,6 +30,7 @@ const ChatPage = () => {
     event.preventDefault(); // 폼의 기본 제출 동작을 막음
     if (ws) {
       ws.send(message); // WebSocket을 통해 채팅 메시지를 전송
+      setChatLog((chatLog) => [...chatLog, message]); // 메시지를 chatLog에 추가
       setMessage(""); // 메시지 전송 후 입력 필드를 비움
     }
   };
