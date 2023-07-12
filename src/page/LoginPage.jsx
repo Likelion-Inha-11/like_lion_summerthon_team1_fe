@@ -112,7 +112,7 @@ const LoginPage = (props) => {
     }
 
     axios
-      .post("https://soozzang.p-e.kr/login", {
+      .post(`https://soozzang.p-e.kr/login/`, {
         // 입력된 userID 와 password 정보를 post로 넘겨주는 코드
         userID: id,
         password: password,
