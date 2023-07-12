@@ -48,9 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "https://nahyeonnnn.github.io/like_lion_summerthon_team1_test",
-  "devDependencies": {
-    "gh-pages": "^5.0.0"
   }
 }

@@ -20,7 +20,7 @@ const ChatListName = styled.h3`
 const ChatList2 = (props) => {
     return (
         <ChatList2Container>
-            <ChatListName>현재 이용자가 가장 많은 채팅방</ChatListName>
+            <ChatListName>이용자 수가 가장 많은 채팅방</ChatListName>
             <div>
                 <CardList IdOfUser={props.IdOfUser} SortOption="MostJoin" DataOption={props.TestData}></CardList>
             </div>

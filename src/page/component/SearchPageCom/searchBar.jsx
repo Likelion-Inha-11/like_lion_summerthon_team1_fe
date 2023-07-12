@@ -129,7 +129,7 @@ const SearchBar = ({ onSearch }) => {
                   <AutoSearchData key={suggestion.id} 
                   onClick={() => handleSelectSuggestion(suggestion)}
                   >
-                  <a href="#">{suggestion.name}</a>
+                  {suggestion.name}
                 </AutoSearchData>
                 ))}
               </AutoSearchWrap>

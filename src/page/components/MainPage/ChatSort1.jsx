@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { styled } from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import CardList from './CardList';
 
 const ChatList1Container = styled.div`
@@ -17,27 +16,11 @@ const ChatListName = styled.h3`
     font-size: 1.5rem;
 `;
 
-// const HandleChange = styled.select`
-    
-// `;
-
 const ChatList1 = (props) => {
-    // const [sort, setSort] = useState("MostSearched");
     return (
         <ChatList1Container>
             <ChatListName>인기 채팅방</ChatListName>
-            {/* <div>
-                <HandleChange 
-                    onChange={(e)=>{
-                        setSort(e.target.value);
-                    }}>
-                    <option value="MostSearched">최다 검색 순</option>
-                    <option value="MostJoin">최다 참여 순</option>
-                    <option value="MostPopular">인기순</option>
-                </HandleChange>
-            </div> */}
             <CardList IdOfUser={props.IdOfUser} SortOption="MostPopular" DataOption={props.TestData}></CardList>
-            
         </ChatList1Container>
     );
 };

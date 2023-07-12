@@ -1,6 +1,6 @@
 import React from "react";
 import "./bottomBar.css";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +10,6 @@ library.add(faHome, faSearch, faUser);
 const BottomBar = (props) => {
   const navigate = useNavigate();
 
-  // console.log(props);
   function moveToMain(){ // mainPage로 이동하는 함수
     navigate(`/main/${props.IdOfUser}`)
   }

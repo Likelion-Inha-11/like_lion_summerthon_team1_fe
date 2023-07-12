@@ -1,13 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { styled, css} from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import BottomBar from './component/SearchPageCom/bottomBar';
 import { useParams } from 'react-router-dom';
-
-//채팅방 생성
-//예원님이 보내주신 CreateChat.jsx와 (직접)merge
-//RoomEnter Error,,
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -107,10 +103,6 @@ const CreateButton = styled.button`
     
 `;
 
-const InsertHashtag = styled.textarea`
-    
-`;
-
 const CreateRoom = () => {
     // onChange로 관리할 문자열
     const [hashtag, setHashtag] = useState('');
@@ -158,12 +150,11 @@ const handleRemoveHash = (index) => {
                 name : newChatTitle,
                 user : [Id4],
                 category : 2
-
             })
             .then((res)=>{
                 console.log(res);
                 setRoomId(res.data.room_id);
-                // RoomEnter();
+                alert("개설이 완료되었습니다.")
             })
             .catch((e)=>{
                 console.log(e);
@@ -199,18 +190,16 @@ const handleRemoveHash = (index) => {
         <div>
             <Title>채팅방 개설</Title>
             <RoomTitle placeholder='채팅방 이름 작성..' onChange={insertTitle} value={newChatTitle}></RoomTitle>
-            {/* <InsertHashtag placeholder='해시태그 추가하기'></InsertHashtag> */}
             
             <HashTagWrapper>
-      <HashInput type="text" onKeyUp={handleEnter} />
-      <HashWrapOuter>
-        {hashArr.map((hash, index) => (
-          <HashWrapInner key={index} onClick={() => handleRemoveHash(index)}>
-            {hash}
-          </HashWrapInner>
-        ))}
-      </HashWrapOuter>
-    </HashTagWrapper>
+                <HashInput type="text" onKeyUp={handleEnter} />
+                    <HashWrapOuter>
+                        {hashArr.map((hash, index) => (
+                        <HashWrapInner key={index} onClick={() => handleRemoveHash(index)}>{hash}
+                        </HashWrapInner>
+                        ))}
+                    </HashWrapOuter>
+            </HashTagWrapper>
 
             <CreateButton onClick={buttonClick}>개설하기</CreateButton>
             <button onClick={buttonDelete}>임시 삭제버튼</button>

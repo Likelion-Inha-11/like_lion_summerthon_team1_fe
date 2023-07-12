@@ -1,14 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const FullBox = styled.div`
-  margin: 3rem 2rem 2rem 2rem;
-  height: 20rem;
-`;
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -41,28 +35,8 @@ const SignupText2 = styled.p`
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
+  align-items : center;
   padding: 1rem;
-`;
-
-const NicknameBox = styled.div`
-  width: 18rem;
-  padding-bottom: 1rem;
-`;
-
-const NicknameText = styled.p`
-  font-size: 0.8rem;
-  color: gray;
-  font-weight: bold;
-`;
-
-const NicknameInput = styled.input`
-  width: 12rem;
-  border-radius: 2rem;
-  background-color: #a5d7f4;
-  opacity: 0.5;
-  border-style: none;
-  height: 2rem;
-  box-shadow: 0rem 0.3rem 0.3rem gray;
 `;
 
 const IdBox = styled.div`
@@ -81,6 +55,7 @@ const IdInput = styled.input`
   border-radius: 2rem;
   background-color: #a5d7f4;
   opacity: 0.5;
+  padding-left : 1rem;
   border-style: none;
   height: 2rem;
   box-shadow: 0rem 0.3rem 0.3rem gray;
@@ -103,44 +78,8 @@ const PasswordInput = styled.input`
   opacity: 0.5;
   border-style: none;
   height: 2rem;
+  padding-left : 1rem;
   box-shadow: 0rem 0.3rem 0.3rem gray;
-`;
-
-const ButtonDiv = styled.div`
-  width: 15rem;
-  /* background-color: wheat; */
-  margin: 2rem 0rem 0rem 1.5rem;
-  height: 5rem;
-  display: flex;
-  justify-content: space-evenly;
-`;
-
-const SignupComplete = styled.button`
-  width: 6rem;
-  height: 2.5rem;
-  background-color: #d2ebf9;
-  border-style: none;
-  border-radius: 0.5rem;
-  box-shadow: 0rem 0.1rem 0.2rem gray;
-`;
-
-const SignupCompleteText = styled.p`
-  font-weight: bolder;
-  margin: 0;
-`;
-
-const SignupCancle = styled.button`
-  width: 6rem;
-  height: 2.5rem;
-  background-color: #d2ebf9;
-  border-style: none;
-  border-radius: 0.5rem;
-  box-shadow: 0rem 0.1rem 0.2rem gray;
-`;
-
-const SignupCancleText = styled.p`
-  font-weight: bolder;
-  margin: 0;
 `;
 
 const ButtonBox = styled.div`
@@ -218,10 +157,13 @@ const SignupPage = (props) => {
         console.log(Id); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (ID check)
         console.log(Password); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (Password check)
         console.log(res);
+        alert("회원가입이 완료되었습니다.");
+        navigate(-1)
       })
       .catch((e) => {
         // axios error check하는 코드
         console.log(e);
+        alert("아이디 중복입니다.")
       });
   }
 
@@ -232,45 +174,10 @@ const SignupPage = (props) => {
     navigate(`/login`);
   }
 
-  //     {/* <SignupContainer>
-  //     <input
-  //       onChange={insertId}
-  //       placeholder="ID"
-  //       value={Id}
-  //     ></input> */}
-
-  //     {/* Password 입력칸 */}
-  //     {/* <input type="password"
-  //       onChange={insertPassword}
-  //       placeholder="Password"
-  //       value={Password}
-  //     ></input>
-  //     <br></br>
-  //     </SignupContainer> */}
-
-  //     {/* <button onClick={BtnClick}>회원가입하기</button> */}
-  //       <IdBox>
-  //         <IdText>아이디 입력</IdText>
-  //         <IdInput placeholder="   ID"></IdInput>
-  //       </IdBox>
-  //       <PasswordBox>
-  //         <PasswordText>비밀번호 입력</PasswordText>
-  //         <PasswordInput placeholder="    Password"></PasswordInput>
-  //       </PasswordBox>
-
-  //     <ButtonDiv>
-  //       <SignupComplete>
-  //         <SignupCompleteText>가입 완료</SignupCompleteText>
-  //       </SignupComplete>
-  //       <SignupCancle>
-  //         <SignupCancleText>가입 취소</SignupCancleText>
-  //       </SignupCancle>
-  //     </ButtonDiv>
-  //   </>
-  // );
   return (
     <>
-      <FullBox>
+      <SignupContainer>
+
         <SignupTextBox>
           <SignupText>회원가입</SignupText>
           <SignupText2>
@@ -281,13 +188,14 @@ const SignupPage = (props) => {
         <InputBox>
           <IdBox>
             <IdText>아이디 입력</IdText>
-            <IdInput placeholder="   ID" onChange={insertId} value={Id}></IdInput>
+            <IdInput placeholder="ID" onChange={insertId} value={Id}></IdInput>
           </IdBox>
           <PasswordBox>
             <PasswordText>비밀번호 입력</PasswordText>
-            <PasswordInput placeholder="    Password" onChange={insertPassword} value={Password}></PasswordInput>
+            <PasswordInput placeholder="Password" type="password" onChange={insertPassword} value={Password}></PasswordInput>
           </PasswordBox>
         </InputBox>
+
         <ButtonBox>
           <CompleteButton>
             <CompleteButtonText onClick={BtnClick}>가입 완료</CompleteButtonText>
@@ -296,7 +204,8 @@ const SignupPage = (props) => {
             <CancelButtonText onClick={BtnClick2}>가입 취소</CancelButtonText>
           </CancelButton>
         </ButtonBox>
-      </FullBox>
+        
+        </SignupContainer>
     </>
   );
 };

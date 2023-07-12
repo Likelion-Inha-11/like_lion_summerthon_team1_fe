@@ -31,17 +31,8 @@ const ServiceName = styled.p`
   `;
 
   const LinkDiv = styled.div`
-    /* width: 15rem;
-    height: 2rem; */
     display: flex;
     flex-direction: column;
-  `;
-
-  const SearchLink = styled.a`
-    font-size: 1rem;
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 1rem;
   `;
 
   const SignupLink = styled.div`
@@ -112,7 +103,7 @@ const LoginPage = (props) => {
     }
 
     axios
-      .post(`https://soozzang.p-e.kr/login/`, {
+      .post("https://soozzang.p-e.kr/login/", {
         // 입력된 userID 와 password 정보를 post로 넘겨주는 코드
         userID: id,
         password: password,
@@ -126,6 +117,7 @@ const LoginPage = (props) => {
       .catch((e) => {
         // axios error check하는 코드
         console.log(e);
+        alert("일치하는 회원 정보가 없습니다.")
       });
   };
 
@@ -139,14 +131,14 @@ const LoginPage = (props) => {
       {/* ID 입력칸 */}
       <input
         onChange={insertId}
-        placeholder="ID 근데 파란색으로 어케 바꾸냐"
+        placeholder="ID"
         value={id}
       ></input>
 
       {/* Password 입력칸 */}
       <input type="password"
         onChange={insertPassword}
-        placeholder="Password 근데 파란색으로 어케 바꾸냐"
+        placeholder="Password"
         value={password}
       ></input>
       <br></br>
@@ -154,7 +146,6 @@ const LoginPage = (props) => {
       </LoginContainer>
 
       <LinkDiv>
-        <SearchLink>아이디/비밀번호 찾기</SearchLink>
         <SignupLink>
           <Link to={`/signup`}>회원가입</Link>
         </SignupLink>

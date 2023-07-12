@@ -30,8 +30,6 @@ const MainHeader = (props) => {
 
     const navigate = useNavigate();
 
-    console.log('mainheader props!');
-    console.log(props);
     useEffect(()=>{
         axios
             .get(`https://soozzang.p-e.kr/room_list_create/`)
@@ -42,13 +40,11 @@ const MainHeader = (props) => {
                 console.log(error);
             });
     },[]);
-    // const navigate = useNavigate();
     
-    //버튼에 onClink={()=>navigate()} 추가
     return (
         <>
             <HeaderContainer>
-                <ChatName>ㅇㅇ챗</ChatName>
+                <ChatName>breezer</ChatName>
                 <CreateButton onClick={()=>navigate(`/create/${props.IdOfUser}`)}>개설하기</CreateButton>
             </HeaderContainer>
         </>
