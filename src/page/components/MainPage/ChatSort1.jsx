@@ -7,7 +7,7 @@ const ChatList1Container = styled.div`
     border: none;
     background: rgba(165, 215, 244, 0.39);
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
-    margin:  0 2rem 2rem 2rem;
+    margin: 0 2rem 2rem 2rem;
 `;
 
 const ChatListName = styled.h3`
