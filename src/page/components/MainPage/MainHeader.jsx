@@ -29,7 +29,7 @@ const CreateButton = styled.button`
 const MainHeader = (props) => {
 
     const navigate = useNavigate();
-    
+  
     return (
         <>
             <HeaderContainer>

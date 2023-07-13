@@ -66,7 +66,7 @@ const MyPageBody = () => {
 
     useEffect(()=>{
         axios
-            .get(`https://soozzang.p-e.kr/room_list_create/`)
+            .get(`${process.env.REACT_APP_API}/room_list_create/`)
             .then((res)=>{
                 console.log(res);
                 const roomArray = res.data.filter(data => data.user.includes(Id3));
