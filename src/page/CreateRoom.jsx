@@ -5,7 +5,7 @@ import { useState } from 'react';
 import BottomBar from './component/SearchPageCom/bottomBar';
 import { useParams } from 'react-router-dom';
 
-axios.defaults.xsrfHeaderName = "HTTP_X_CSRFTOKEN";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
