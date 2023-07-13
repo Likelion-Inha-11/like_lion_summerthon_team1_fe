@@ -13,7 +13,7 @@ const ChatList1Container = styled.div`
 const ChatListName = styled.h3`
     margin: 0px;
     padding: 1.25rem 0 1.25rem 1rem;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 `;
 
 const ChatList1 = (props) => {
