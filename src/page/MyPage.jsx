@@ -6,7 +6,7 @@ import axios from 'axios';
 import UserTestImage from './components/MyPage/UserTestImage.jpg'
 import { useParams } from 'react-router-dom';
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
@@ -17,7 +17,7 @@ const MyPage = () => {
 
     useEffect(()=>{
         axios
-            .get(`${process.env.REACT_APP_API}/mypage/${Id3}/`)
+            .get(`${process.env.REACT_APP_API}/my_info/`)
             .then((res)=>{
                 console.log(res);
                 setUserInfo(res.data);

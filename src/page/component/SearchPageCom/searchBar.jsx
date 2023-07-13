@@ -20,9 +20,10 @@ const SearchForm = styled.form`
   width : 100%;
   height : 60%;
 `
+
 const Search = styled.input`
   border: 0;
-  padding-left: 10px;
+  padding-left: 23px;
   background-color: #eaeaea;
   width: 100%;
   height: 3rem;
@@ -35,7 +36,7 @@ const Search = styled.input`
 const AutoSearchContainer = styled.div`
   z-index: 2;
   height: 200px;
-  width: 302px;
+  width: 315px;
   background-color: #eaeaea;
   position: absolute;
   top: 20px;
@@ -66,27 +67,42 @@ const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState(""); // 검색어를 저장하기 위한 useState
   const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 useState
   const [suggestions, setSuggestions] = useState([]); // 자동완성 결과를 출력하기 위한 useState
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [roomList, setRoomList] = useState([]); // 방 이름 목록을 저장하기 위한 useState
 
-  const handleInputChange = (e) => { // 검색어를 저장하는 함수
-    const {value} = e.target;
+  const handleInputChange = (e) => {
+    const { value } = e.target;
     setQuery(value);
-    const suggestions  = getSuggestions(value);
+    const suggestions = getSuggestions(value);
     setSuggestions(suggestions);
+    setShowSuggestions(true);
   };
 
   const handleSelectSuggestion = (suggestion) => { // 중간 검색 과정에서의 키워드를 저장하는 함수
-    setQuery(suggestion);
+    setQuery(suggestion.name);
     setSuggestions([]);
+    setShowSuggestions(false);
   };
 
-  const handleFormSubmit = (e) => { // 최종 검색 키워드를 저장하는 함수
-    e.preventDefault(); // 폼의 기본동작인 새로고침 방지
-    const results = searchData(query); // 검색 결과 리턴
-    setSearchResults(results); // 검색 결과 업데이트
-    if (typeof onSearch === "function") { // onSearch prop이 유효한 함수인지 확인
-        onSearch(results);
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const results = searchData(query);
+    setSearchResults(results);
+    setSuggestions([]); // 자동완성 결과 초기화
+    setShowSuggestions(false);
+    if (typeof onSearch === "function") {
+      onSearch(results);
     }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleFormSubmit(e);
+    }
+  };
+
+  const handleInputBlur = () => {
+    setShowSuggestions(false);
   };
 
   useEffect(()=>{
@@ -98,7 +114,7 @@ const SearchBar = ({ onSearch }) => {
         .catch((e)=>{
             console.log(e);
         })
-},[suggestions]);
+},[]);
 
   const getSuggestions = (value) => {
     // 검색어 자동 완성 결과를 가져오는 로직을 구현합니다.
@@ -123,10 +139,10 @@ const SearchBar = ({ onSearch }) => {
     <>
       <SearchContainer>
         <SearchForm onSubmit={handleFormSubmit}>
-          <Search style={{ paddingLeft: "10px" }} type="text" value={query} onChange={handleInputChange} placeholder="  Search..."></Search>
+          <Search type="text" value={query} onChange={handleInputChange} onBlur={handleInputBlur} onKeyPress={handleKeyPress} placeholder="Search..."></Search>
           
 
-          {query.length > 0 && suggestions && (
+          {query.length > 0 && showSuggestions && (
             <AutoSearchContainer>
               <AutoSearchWrap>
                 {suggestions.map((suggestion) => (
@@ -140,7 +156,8 @@ const SearchBar = ({ onSearch }) => {
             </AutoSearchContainer>
           )}
 
-
+<br/>
+<br/>
           <ul>
             {/* 검색 결과창 */}
           {searchResults.map((result) => (
