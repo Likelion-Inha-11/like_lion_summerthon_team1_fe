@@ -9,8 +9,8 @@ library.add(faHome, faSearch, faUser);
 const SearchContainer = styled.div`
   display : flex;
   align-items : center;
-  width: 320px;
-  height: 45px;
+  width: 20rem;
+  height: 4rem;
   position: relative;
   border: 0;
   margin-left : 30px;
@@ -25,19 +25,23 @@ const Search = styled.input`
   padding-left: 10px;
   background-color: #eaeaea;
   width: 100%;
-  height: 100%;
+  height: 3rem;
   outline: none;
+  border-radius: 1rem;
+  z-index: 3;
+  position: absolute;
 `;
 
 const AutoSearchContainer = styled.div`
-  z-index: 3;
+  z-index: 2;
   height: 200px;
-  width: 295px;
-  background-color: #fff;
+  width: 302px;
+  background-color: #eaeaea;
   position: absolute;
-  top: 45px;
-  border: 2px solid;
+  top: 20px;
+  /* border: 2px solid; */
   padding: 15px;
+  border-radius: 1rem;
 `;
 
 const AutoSearchWrap = styled.ul`
@@ -119,7 +123,7 @@ const SearchBar = ({ onSearch }) => {
     <>
       <SearchContainer>
         <SearchForm onSubmit={handleFormSubmit}>
-          <Search type="text" value={query} onChange={handleInputChange} placeholder="Search..."></Search>
+          <Search style={{ paddingLeft: "10px" }} type="text" value={query} onChange={handleInputChange} placeholder="  Search..."></Search>
           
 
           {query.length > 0 && suggestions && (
