@@ -5,7 +5,8 @@ import { styled } from 'styled-components';
 
 const MyHeaderDiv = styled.div`
     display: flex;
-    margin: 1.5rem 0 0 1.5rem;
+    margin: 0;
+    margin: 1.5rem 0 1.5rem 1.5rem;
 `;
 
 const UserImage = styled.img`

@@ -13,7 +13,7 @@ const MainPage = () => {
         <>
             <MainHeader IdOfUser={Id1}></MainHeader>
             <ChatSort1 IdOfUser={Id1}></ChatSort1>
-            <ChatSort2 ></ChatSort2>
+            <ChatSort2 IdOfUser={Id1}></ChatSort2>
             <br/>
             <br/>
             <br/>

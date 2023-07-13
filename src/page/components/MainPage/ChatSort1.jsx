@@ -12,7 +12,7 @@ const ChatList1Container = styled.div`
 
 const ChatListName = styled.h3`
     margin: 0px;
-    padding: 1rem 0 1rem 1rem;
+    padding: 1.25rem 0 1.25rem 1rem;
     font-size: 1.5rem;
 `;
 
@@ -20,7 +20,7 @@ const ChatList1 = (props) => {
     return (
         <ChatList1Container>
             <ChatListName>인기 채팅방</ChatListName>
-            <CardList IdOfUser={props.IdOfUser} SortOption="MostPopular" DataOption={props.TestData}></CardList>
+            <CardList IdOfUser={props.IdOfUser} SortOption="MostPopular"></CardList>
         </ChatList1Container>
     );
 };
