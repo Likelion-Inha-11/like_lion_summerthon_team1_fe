@@ -133,7 +133,7 @@ const handleRemoveHash = (index) => {
 
     function RoomEnter(){
         axios
-            .post(`https://soozzang.p-e.kr/room/${RoomId}/enter/`)
+            .post(`${process.env.REACT_APP_API}/${RoomId}/enter/`)
             .then(()=>{
                 console.log('Room enter!');
             })
@@ -146,7 +146,7 @@ const handleRemoveHash = (index) => {
 
     function buttonClick(){
         axios
-            .post(`https://soozzang.p-e.kr/room_list_create/`,{
+            .post(`${process.env.REACT_APP_API}/room_list_create/`,{
                 name : newChatTitle,
                 user : [Id4],
                 category : 2
@@ -165,7 +165,7 @@ const handleRemoveHash = (index) => {
 
     function buttonDelete(){
         axios
-            .delete(`https://soozzang.p-e.kr/room/12/`)
+            .delete(`${process.env.REACT_APP_API}/room/12/`)
             .then(()=>{
                 console.log('삭제완료!');
             })
@@ -176,7 +176,7 @@ const handleRemoveHash = (index) => {
 
     function CheckInfo(){
         axios
-            .get(`https://soozzang.p-e.kr/my_info/`)
+            .get(`${process.env.REACT_APP_API}/my_info/`)
             .then((res)=>{
                 console.log('사용자 정보');
                 console.log(res);

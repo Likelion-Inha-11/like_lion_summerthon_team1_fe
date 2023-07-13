@@ -32,7 +32,7 @@ const MainHeader = (props) => {
 
     useEffect(()=>{
         axios
-            .get(`https://soozzang.p-e.kr/room_list_create/`)
+            .get(`${process.env.REACT_APP_API}/room_list_create/`)
             .then((res)=>{
                 console.log(res);
             })

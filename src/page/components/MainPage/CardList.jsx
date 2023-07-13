@@ -53,7 +53,7 @@ const CardList = (props) => {//cardList -> 각 채팅방 카드 sorting/ map으�
     //처음 화면 렌더링 될 때 
     useEffect(()=>{
         axios
-            .get(`https://soozzang.p-e.kr/room_list_create/`)
+            .get(`${process.env.REACT_APP_API}/room_list_create/`)
             .then((res)=>{
                 console.log('room list get 성공!');
                 setRoomList(res.data);
@@ -98,11 +98,10 @@ const CardList = (props) => {//cardList -> 각 채팅방 카드 sorting/ map으�
     // }
     // },[props.SortOption])//Sort 기준이 바뀔 때마다 실행
 
-    console.log(RoomList);
 
     function eachChatClick(roomId){
         axios
-            .post(`https://soozzang.p-e.kr/room/${roomId}/enter/`)
+            .post(`${process.env.REACT_APP_API}/room/${roomId}/enter/`)
             .then(()=>{
                 console.log('Room enter!');
                 // navigate(`/chat`); 각 채팅방으로 이동

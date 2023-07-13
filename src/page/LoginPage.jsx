@@ -8,7 +8,6 @@ axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
 const ServiceName = styled.p`
-
     font-size: 3rem;
     margin: 2rem;
     font-weight: bold;
@@ -21,21 +20,13 @@ const ServiceName = styled.p`
     flex-direction : column;
     align-items : center;
   `
-
-  const LoginText = styled.div`
-    font-size: 1.5rem;
-    margin: 1rem;
-    font-weight: bold;
-    display: flex;
-    padding-bottom: 1rem;
-  `;
-
   const LinkDiv = styled.div`
     display: flex;
     flex-direction: column;
   `;
 
   const SignupLink = styled.div`
+    padding: 1rem 1.5rem 0rem 1rem;
     font-size: 1rem;
     display: flex;
     justify-content: flex-end;
@@ -49,7 +40,7 @@ const ServiceName = styled.p`
 
   const LoginButton = styled.button`
     background-color: skyblue;
-    width: 17rem;
+    width: 15rem;
     height: 4rem;
     border-radius: 1rem;
     border: 0;
@@ -64,15 +55,55 @@ const ServiceName = styled.p`
     justify-content: center;
   `;
 
-  const SocialLoginText = styled.p`
-    display: flex;
-    justify-content: center;
-  `;
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items : center;
+  padding: 1rem;
+`;
 
-  const SocialLogin = styled.div`
-    display: flex;
-    justify-content: center;
-  `;
+const IdBox = styled.div`
+  width: 14rem;
+  padding-bottom: 1rem;
+`;
+
+const IdText = styled.p`
+  font-size: 0.8rem;
+  color: gray;
+  font-weight: bold;
+`;
+
+const IdInput = styled.input`
+  width: 13rem;
+  border-radius: 2rem;
+  background-color: #a5d7f4;
+  opacity: 0.5;
+  padding-left : 1rem;
+  border-style: none;
+  height: 2rem;
+  box-shadow: 0rem 0.3rem 0.3rem gray;
+`;
+
+const PasswordBox = styled.div`
+  width: 14rem;
+`;
+
+const PasswordText = styled.p`
+  font-size: 0.8rem;
+  color: gray;
+  font-weight: bold;
+`;
+
+const PasswordInput = styled.input`
+  width: 13rem;
+  border-radius: 2rem;
+  background-color: #a5d7f4;
+  opacity: 0.5;
+  border-style: none;
+  height: 2rem;
+  padding-left : 1rem;
+  box-shadow: 0rem 0.3rem 0.3rem gray;
+`;
 
 const LoginPage = (props) => {
   const [id, setId] = useState(""); // ID 저장용 useState
@@ -103,7 +134,7 @@ const LoginPage = (props) => {
     }
 
     axios
-      .post("https://soozzang.p-e.kr/login/", {
+      .post(`${process.env.REACT_APP_API}/login/`, {
         // 입력된 userID 와 password 정보를 post로 넘겨주는 코드
         userID: id,
         password: password,
@@ -123,25 +154,23 @@ const LoginPage = (props) => {
 
   return (
     <>
-      <ServiceName>서비스 이름</ServiceName>
+      <ServiceName>breeze</ServiceName>
 
       <LoginContainer>
 
-      <LoginText Link="">로그인</LoginText>
-      {/* ID 입력칸 */}
-      <input
-        onChange={insertId}
-        placeholder="ID"
-        value={id}
-      ></input>
+      <InputBox>
 
-      {/* Password 입력칸 */}
-      <input type="password"
-        onChange={insertPassword}
-        placeholder="Password"
-        value={password}
-      ></input>
-      <br></br>
+          <IdBox>
+            <IdText>아이디 입력</IdText>
+            <IdInput placeholder="ID" onChange={insertId} value={id}></IdInput>
+          </IdBox>
+
+          <PasswordBox>
+            <PasswordText>비밀번호 입력</PasswordText>
+            <PasswordInput placeholder="Password" type="password" onChange={insertPassword} value={password}></PasswordInput>
+          </PasswordBox>
+          
+        </InputBox>
 
       </LoginContainer>
 
@@ -157,8 +186,6 @@ const LoginPage = (props) => {
         </LoginButton>
       </LoginButtonDiv>
 
-      <SocialLoginText>기존 계정으로 로그인</SocialLoginText>
-      <SocialLogin>{/* 소셜 로그인 버튼 등 */}</SocialLogin>
     </>
   );
 };
