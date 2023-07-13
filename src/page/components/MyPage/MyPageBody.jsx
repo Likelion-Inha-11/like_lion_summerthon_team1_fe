@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const ChatCardDiv= styled.div`
     display: flex;
@@ -57,7 +57,7 @@ const NoChat = styled.p`
 
 const MyPageBody = () => {
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     const {Id3}=useParams();
 
@@ -66,7 +66,7 @@ const MyPageBody = () => {
 
     useEffect(()=>{
         axios
-            .get(`${process.env.REACT_APP_API}room_list_create/`)
+            .get(`${process.env.REACT_APP_API}/room_list_create/`)
             .then((res)=>{
                 console.log(res);
                 const roomArray = res.data.filter(data => data.user.includes(Id3));
@@ -77,24 +77,24 @@ const MyPageBody = () => {
             .catch((error)=>{
                 console.log(error);
             });
-    },[]);
+    },[Id3]);
 
     useEffect(()=>{
         axios
-            .get(`${process.env.REACT_APP_API}user_info/${Id3}/`)
+            .get(`${process.env.REACT_APP_API}/user_info/${Id3}/`)
             .then((res)=>{
                 setMyRoom(res.data.rooms);
             })
             .catch((error)=>{
                 console.log(error);
             })
-    },[]);
+    },[Id3]);
 
     console.log(roomList);
 
     function ChatCardClick(roomId){
         axios
-            .post(`${process.env.REACT_APP_API}room/${roomId}/enter/`)
+            .post(`${process.env.REACT_APP_API}/room/${roomId}/enter/`)
             .then(()=>{
                 console.log('Room enter!');
                 // navigate(`/chat/${roomId}`); 각 채팅방으로 이동
@@ -111,7 +111,7 @@ const MyPageBody = () => {
             <ChatListTitle>참여한 채팅방 목록</ChatListTitle>
             <ChatCardDiv>
                 {
-                roomList.length===0?<NoChat>현재 참여한 비공개 채팅방이 없습니다.</NoChat>:
+                roomList.length===0?<NoChat>현재 참여한 공개 채팅방이 없습니다.</NoChat>:
                 roomList.map((eachRoom)=>(
                     <ChatCard onClick={()=>ChatCardClick(eachRoom.id)}>
                         <ChatImage></ChatImage>

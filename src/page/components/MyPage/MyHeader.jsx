@@ -41,7 +41,7 @@ const MyHeader = (props) => {
 
     function buttonLogout(){
         axios
-            .get(`${process.env.REACT_APP_API}logout/`)
+            .get(`${process.env.REACT_APP_API}/logout/`)
             .then((res)=>{
                 console.log(res);
                 navigate(`/login`)

@@ -154,7 +154,7 @@ const SignupPage = (props) => {
     }
 
     axios
-      .post(`${process.env.REACT_APP_API}signup/`, {
+      .post(`${process.env.REACT_APP_API}/signup/`, {
         // 입력된 userID 와 password 정보를 post로 넘겨주는 코드
         userID: Id,
         password: Password,
