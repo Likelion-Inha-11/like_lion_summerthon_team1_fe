@@ -3,17 +3,32 @@ import { styled } from 'styled-components';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const ChatKategorie = styled.p`
-    
+const ChatCardDiv= styled.div`
+    display: flex;
+    margin : 1.875rem 1.875rem 0;
+    padding-bottom: 1rem;
+    gap: 1rem;
+    overflow: scroll visible;
+    width: calc(100%);
 `;
 
 const ChatCard = styled.div`
-
+    width: 11rem;
+    height: 13rem;
+    border: 1px solid;
+    border-color: #80808078;
+    border-radius: 20px;
+    position: relative;
 `;
 
 const ChatTitle = styled.p`
-    
+    font-size: 2rem;
+    color: gray;
+    position: absolute;
+    bottom: 0.75rem;
+    left: 1rem;
 `;
 
 const ChatListTitle = styled.h3`
@@ -21,55 +36,103 @@ const ChatListTitle = styled.h3`
     margin-top: 2rem;
 `;
 
+const ChatUserCount = styled.p`
+    color: gray;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 1rem;
+`;
 
-const MyPageBody = (props) => {
+const ChatImage = styled.div`
+    background-color: rgba(165, 215, 244, 0.39);
+    width: 11rem;
+    height: 7rem;
+    border-radius: 20px 20px 0 0;
+`;
+
+const NoChat = styled.p`
+    color: gray;
+    margin: 0px;
+`;
+
+const MyPageBody = () => {
+
+    const navigate = useNavigate();
 
     const {Id3}=useParams();
-    // console.log('id?');
-    // console.log(Id3);
 
-    const [roomList, setRoomList]=useState([]);//
-    const [roomNameList, setNameList]=useState(props.UserInfo.rooms);
-    console.log(props);
+    const [roomList, setRoomList]=useState([]);
+    const [myRoomList, setMyRoom]=useState([]);
 
     useEffect(()=>{
         axios
             .get(`${process.env.REACT_APP_API}/room_list_create/`)
             .then((res)=>{
-                console.log(res.data);
-                // const newArray = res.data.filter((obj) => {obj.user.includes(Id3)});
-                // console.log(newArray);
-                setRoomList(res.data);
-
+                console.log(res);
+                const roomArray = res.data.filter(data => data.user.includes(Id3));
+                setRoomList(roomArray);
+                // console.log('room list');
+                console.log(roomArray);
             })
             .catch((error)=>{
                 console.log(error);
             });
     },[]);
 
+    useEffect(()=>{
+        axios
+            .get(`https://soozzang.p-e.kr/user_info/${Id3}/`)
+            .then((res)=>{
+                setMyRoom(res.data.rooms);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    },[]);
+
     console.log(roomList);
+
+    function ChatCardClick(roomId){
+        axios
+            .post(`https://soozzang.p-e.kr/room/${roomId}/enter/`)
+            .then(()=>{
+                console.log('Room enter!');
+                // navigate(`/chat/${roomId}`); 각 채팅방으로 이동
+            })
+            .catch((e)=>{
+                console.log('Cannot Enter!');
+                console.log(roomId);
+                console.log(e);
+            });
+    }
 
     return (
         <div>
-            <ChatKategorie></ChatKategorie>
             <ChatListTitle>참여한 채팅방 목록</ChatListTitle>
-            {
+            <ChatCardDiv>
+                {
+                roomList.length===0?<NoChat>현재 참여한 비공개 채팅방이 없습니다.</NoChat>:
                 roomList.map((eachRoom)=>(
-                    <ChatCard>
+                    <ChatCard onClick={()=>ChatCardClick(eachRoom.id)}>
+                        <ChatImage></ChatImage>
                         <ChatTitle>{eachRoom.name}</ChatTitle>
+                        <ChatUserCount>user : {eachRoom.user_count}</ChatUserCount>
                     </ChatCard>
                 ))
-            }
+                }
+            </ChatCardDiv>
             <ChatListTitle>나의 채팅방 목록</ChatListTitle>
-            {
-                roomList.map((eachRoom)=>(
-                    eachRoom.is_public!==true?
-                        <ChatCard>
-                            <ChatTitle>{eachRoom.name}</ChatTitle>
-                        </ChatCard>
-                    :<p>참여한 비공개 채팅방이 없습니다.</p>
+            <ChatCardDiv>
+                {
+                myRoomList.length===0?<NoChat>현재 참여한 비공개 채팅방이 없습니다.</NoChat>:
+                myRoomList.map((eachRoom)=>(
+                    <ChatCard>
+                        <ChatImage></ChatImage>
+                        <ChatTitle>{eachRoom}</ChatTitle>
+                    </ChatCard>
                 ))
-            }
+                }
+            </ChatCardDiv>
         </div>
     );
 };

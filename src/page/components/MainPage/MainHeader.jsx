@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 const HeaderContainer = styled.div`
     display: flex;
@@ -29,22 +29,11 @@ const CreateButton = styled.button`
 const MainHeader = (props) => {
 
     const navigate = useNavigate();
-
-    useEffect(()=>{
-        axios
-            .get(`${process.env.REACT_APP_API}/room_list_create/`)
-            .then((res)=>{
-                console.log(res);
-            })
-            .catch((error)=>{
-                console.log(error);
-            });
-    },[]);
-    
+  
     return (
         <>
             <HeaderContainer>
-                <ChatName>breezer</ChatName>
+                <ChatName>breeze</ChatName>
                 <CreateButton onClick={()=>navigate(`/create/${props.IdOfUser}`)}>개설하기</CreateButton>
             </HeaderContainer>
         </>

@@ -12,17 +12,17 @@ const ChatList2Container = styled.div`
 
 const ChatListName = styled.h3`
     margin: 0px;
-    padding: 1rem 0 1rem 1rem;
-    font-size: 1.5rem;
+    padding: 1.25rem 0 1.25rem 1rem;
+    font-size: 1.25rem;
 `;
 
 
 const ChatList2 = (props) => {
     return (
         <ChatList2Container>
-            <ChatListName>이용자 수가 가장 많은 채팅방</ChatListName>
+            <ChatListName>이용자가 많은 채팅방</ChatListName>
             <div>
-                <CardList IdOfUser={props.IdOfUser} SortOption="MostJoin" DataOption={props.TestData}></CardList>
+                <CardList IdOfUser={props.IdOfUser} SortOption="MostJoin"></CardList>
             </div>
         </ChatList2Container>
     );
