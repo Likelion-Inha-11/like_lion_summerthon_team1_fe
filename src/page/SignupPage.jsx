@@ -164,7 +164,7 @@ const SignupPage = (props) => {
         console.log(Password); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (Password check)
         console.log(res);
         alert("회원가입이 완료되었습니다.");
-        navigate(-1)
+        navigate(`/login`)
       })
       .catch((e) => {
         // axios error check하는 코드

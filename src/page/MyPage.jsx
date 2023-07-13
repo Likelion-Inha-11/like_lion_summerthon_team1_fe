@@ -26,7 +26,7 @@ const MyPage = () => {
             .catch((e)=>{
                 console.log(e);
             })
-    },[]);
+    },[Id3]);
 
     return (
         <div>

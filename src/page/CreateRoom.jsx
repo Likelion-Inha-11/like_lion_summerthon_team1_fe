@@ -105,7 +105,7 @@ const CreateButton = styled.button`
 
 const CreateRoom = () => {
     // onChange로 관리할 문자열
-    const [hashtag, setHashtag] = useState('');
+    //const [hashtag, setHashtag] = useState('');
 
     const {Id4} = useParams();
 
@@ -132,7 +132,7 @@ const handleRemoveHash = (index) => {
     }
 
     function RoomEnter(){
-        axios
+      axios
             .post(`${process.env.REACT_APP_API}/${RoomId}/enter/`)
             .then(()=>{
                 console.log('Room enter!');
@@ -145,7 +145,7 @@ const handleRemoveHash = (index) => {
     };
 
     function buttonClick(){
-        axios
+      axios
             .post(`${process.env.REACT_APP_API}/room_list_create/`,{
                 name : newChatTitle,
                 user : [Id4],
@@ -165,7 +165,7 @@ const handleRemoveHash = (index) => {
 
     function buttonDelete(){
         axios
-            .delete(`${process.env.REACT_APP_API}/room/12/`)
+            .delete(`${process.env.REACT_APP_API}/room/2/`)
             .then(()=>{
                 console.log('삭제완료!');
             })
