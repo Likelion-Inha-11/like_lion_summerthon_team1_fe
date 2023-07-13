@@ -154,7 +154,7 @@ const SignupPage = (props) => {
     }
 
     axios
-      .post(`${process.env.REACT_APP_API}/signup`, {
+      .post(`${process.env.REACT_APP_API}signup/`, {
         // 입력된 userID 와 password 정보를 post로 넘겨주는 코드
         userID: Id,
         password: Password,
@@ -164,7 +164,7 @@ const SignupPage = (props) => {
         console.log(Password); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (Password check)
         console.log(res);
         alert("회원가입이 완료되었습니다.");
-        navigate(-1)
+        navigate(`/login`)
       })
       .catch((e) => {
         // axios error check하는 코드

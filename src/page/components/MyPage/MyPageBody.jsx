@@ -66,7 +66,7 @@ const MyPageBody = () => {
 
     useEffect(()=>{
         axios
-            .get(`${process.env.REACT_APP_API}/room_list_create/`)
+            .get(`${process.env.REACT_APP_API}room_list_create/`)
             .then((res)=>{
                 console.log(res);
                 const roomArray = res.data.filter(data => data.user.includes(Id3));
@@ -81,7 +81,7 @@ const MyPageBody = () => {
 
     useEffect(()=>{
         axios
-            .get(`https://soozzang.p-e.kr/user_info/${Id3}/`)
+            .get(`${process.env.REACT_APP_API}user_info/${Id3}/`)
             .then((res)=>{
                 setMyRoom(res.data.rooms);
             })
@@ -94,7 +94,7 @@ const MyPageBody = () => {
 
     function ChatCardClick(roomId){
         axios
-            .post(`https://soozzang.p-e.kr/room/${roomId}/enter/`)
+            .post(`${process.env.REACT_APP_API}room/${roomId}/enter/`)
             .then(()=>{
                 console.log('Room enter!');
                 // navigate(`/chat/${roomId}`); 각 채팅방으로 이동

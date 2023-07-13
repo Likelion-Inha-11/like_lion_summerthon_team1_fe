@@ -17,7 +17,7 @@ const MyPage = () => {
 
     useEffect(()=>{
         axios
-            .get(`${process.env.REACT_APP_API}/mypage/${Id3}/`)
+            .get(`${process.env.REACT_APP_API}mypage/${Id3}/`)
             .then((res)=>{
                 console.log(res);
                 setUserInfo(res.data);
