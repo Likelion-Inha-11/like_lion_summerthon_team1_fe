@@ -24,8 +24,10 @@ const BreezeImg = styled.img`
 const SignupTextBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 20rem;
-
+  width: 14rem;
+  padding-left : 2rem;
+  padding-top : 1rem;
+`
 const SignupContainer = styled.div`
   display: flex;
   margin-top: -3rem;
@@ -48,7 +50,7 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 0rem 1rem 6.5rem;
 `;
 
 const IdBox = styled.div`
@@ -84,6 +86,8 @@ const PasswordText = styled.p`
   font-size: 0.7rem;
   margin: 0.2rem;
   color: gray;
+`
+
 
 const PasswordInput = styled.input`
   width: 10rem;
@@ -98,7 +102,7 @@ const PasswordInput = styled.input`
 
 const ButtonBox = styled.div`
   display: flex;
-  margin-top: 3rem;
+  margin-top: 1rem;
   width: 14rem;
   height: 3rem;
   /* background-color: coral; */
@@ -222,6 +226,7 @@ const SignupPage = (props) => {
             ></PasswordInput>
           </PasswordBox>
         </InputBox>
+
         <ButtonBox>
           <CompleteButton>
             <CompleteButtonText onClick={BtnClick}>
