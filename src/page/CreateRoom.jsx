@@ -1,10 +1,12 @@
-import React from 'react';
-import axios from 'axios';
-import { styled, css} from 'styled-components';
-import { useState } from 'react';
-import BottomBar from './component/SearchPageCom/bottomBar';
-import { useParams } from 'react-router-dom';
-
+import React from "react";
+import axios from "axios";
+import { styled, css } from "styled-components";
+import { useState } from "react";
+import BottomBar from "./component/SearchPageCom/bottomBar";
+import { useNavigate, Navigate, useParams } from "react-router-dom";
+import MyHeader from "./components/MyPage/MyHeader";
+import UserTestImage from "./components/MyPage/UserTestImage.jpg";
+import { UserImage } from "./components/MyPage/MyHeader";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
@@ -42,7 +44,7 @@ const hashDivrap = css`
   }
 
   .HashInput {
-    width: auto;
+    width: 3rem;
     margin: 10px;
     display: inline-flex;
     outline: none;
@@ -74,7 +76,7 @@ const HashWrapInner = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: 8px;
-  line-height:10px;
+  line-height: 10px;
   margin-right: 5px;
   cursor: pointer;
 `;
@@ -91,123 +93,193 @@ const HashInput = styled.input`
   border: none;
 `;
 
+const BodyBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 30rem;
+  justify-content: space-evenly;
+`;
+
+const TitleBox = styled.div`
+  display: flex;
+  margin: 2rem 0 0 2rem;
+`;
+
 const Title = styled.h2`
-    
+  font-weight: bolder;
 `;
 
 const RoomTitle = styled.input`
-    
+  width: 15rem;
+  height: 2.5rem;
+  border: none;
+  background-color: #a5d7f4;
+  margin: 1rem 0 0 rem;
+  border-radius: 5px;
 `;
 
 const CreateButton = styled.button`
-    
+  width: 6rem;
+  height: 2.5rem;
+  border-style: none;
+  border-radius: 0.3rem;
+  background-color: #d2ebf9;
+  box-shadow: 0rem 0.2rem 0.3rem gray;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  width: 15rem;
+  justify-content: space-around;
+`;
+
+const CancleButton = styled.button`
+  width: 6rem;
+  height: 2.5rem;
+  border-style: none;
+  border-radius: 0.3rem;
+  background-color: #d2ebf9;
+  box-shadow: 0rem 0.2rem 0.3rem gray;
 `;
 
 const CreateRoom = () => {
-    // onChange로 관리할 문자열
-    //const [hashtag, setHashtag] = useState('');
+  // onChange로 관리할 문자열
+  //const [hashtag, setHashtag] = useState('');
+  const navigate = useNavigate();
+  const { Id4 } = useParams();
 
-    const {Id4} = useParams();
+  const [newChatTitle, setTitle] = useState("");
+  const [RoomId, setRoomId] = useState();
 
-    const [newChatTitle, setTitle]=useState("");
-    const [RoomId, setRoomId] = useState();
+  const [hashArr, setHashArr] = useState([]);
 
-    const [hashArr, setHashArr] = useState([]);
-
-const handleEnter = (e) => {
-  if (e.keyCode === 13 && e.target.value.trim() !== '') {
-    const newHash = '#' + e.target.value;
-    setHashArr((prevHashArr) => [...prevHashArr, newHash]);
-    e.target.value = '';
-  }
-};
-
-const handleRemoveHash = (index) => {
-  setHashArr((prevHashArr) => prevHashArr.filter((_, i) => i !== index));
-};
-
-    function insertTitle(e){
-        setTitle(e.target.value);
-        console.log(newChatTitle);
+  const handleEnter = (e) => {
+    if (e.keyCode === 13 && e.target.value.trim() !== "") {
+      const newHash = "#" + e.target.value;
+      setHashArr((prevHashArr) => [...prevHashArr, newHash]);
+      e.target.value = "";
     }
+  };
 
-    function RoomEnter(){
-      axios
-            .post(`${process.env.REACT_APP_API}/${RoomId}/enter/`)
-            .then(()=>{
-                console.log('Room enter!');
-            })
-            .catch((e)=>{
-                console.log('Cannot Enter!');
-                console.log(RoomId);
-                console.log(e);
-            });
-    };
+  const handleRemoveHash = (index) => {
+    setHashArr((prevHashArr) => prevHashArr.filter((_, i) => i !== index));
+  };
 
-    function buttonClick(){
-      axios
-            .post(`${process.env.REACT_APP_API}/room_list_create/`,{
-                name : newChatTitle,
-                user : [Id4],
-                category : 2
-            })
-            .then((res)=>{
-                console.log(res);
-                setRoomId(res.data.room_id);
-                alert("개설이 완료되었습니다.")
-            })
-            .catch((e)=>{
-                console.log(e);
-                console.log(newChatTitle);
-                console.log(Id4);
-            });
-    };
+  function insertTitle(e) {
+    setTitle(e.target.value);
+    console.log(newChatTitle);
+  }
 
-    function buttonDelete(){
-        axios
-            .delete(`${process.env.REACT_APP_API}/room/2/`)
-            .then(()=>{
-                console.log('삭제완료!');
-            })
-            .catch((e)=>{
-                console.log(e);
-            });
-    };
+  function RoomEnter() {
+    axios
+      .post(`${process.env.REACT_APP_API}/${RoomId}/enter/`)
+      .then(() => {
+        console.log("Room enter!");
+      })
+      .catch((e) => {
+        console.log("Cannot Enter!");
+        console.log(RoomId);
+        console.log(e);
+      });
+  }
 
-    function CheckInfo(){
-        axios
-            .get(`${process.env.REACT_APP_API}/my_info/`)
-            .then((res)=>{
-                console.log('사용자 정보');
-                console.log(res);
-            })
-            .catch((e)=>{
-                console.log(e);
-            });
-    };
+  function buttonClick() {
+    const token = "token"; // replace with your actual token
+    axios
+      .post(
+        `${process.env.REACT_APP_API}/room_list_create/`,
+        {
+          name: newChatTitle,
+          user: [Id4],
+          category: 2,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setRoomId(res.data.room_id);
+        alert("개설이 완료되었습니다.");
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log(newChatTitle);
+        console.log(Id4);
+      });
+  }
 
-    return (
-        <div>
-            <Title>채팅방 개설</Title>
-            <RoomTitle placeholder='채팅방 이름 작성..' onChange={insertTitle} value={newChatTitle}></RoomTitle>
-            
-            <HashTagWrapper>
-                <HashInput type="text" onKeyUp={handleEnter} />
-                    <HashWrapOuter>
-                        {hashArr.map((hash, index) => (
-                        <HashWrapInner key={index} onClick={() => handleRemoveHash(index)}>{hash}
-                        </HashWrapInner>
-                        ))}
-                    </HashWrapOuter>
-            </HashTagWrapper>
+  function buttonDelete() {
+    axios
+      .delete(`${process.env.REACT_APP_API}/room/2/`)
+      .then(() => {
+        console.log("삭제완료!");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
-            <CreateButton onClick={buttonClick}>개설하기</CreateButton>
-            <button onClick={buttonDelete}>임시 삭제버튼</button>
-            <button onClick={CheckInfo}>사용자 확인버튼</button>
-            <button onClick={RoomEnter}>채팅방 입장하기</button>
-            <BottomBar IdOfUser={Id4}></BottomBar>
-        </div>
-    );
+  function CheckInfo() {
+    axios
+      .get(`${process.env.REACT_APP_API}/my_info/`)
+      .then((res) => {
+        console.log("사용자 정보");
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  function movetoBack() {
+    navigate(-1);
+  }
+  return (
+    <>
+      <TitleBox>
+        <Title>채팅방 개설</Title>
+      </TitleBox>
+      <BodyBox>
+        <UserImage src={UserTestImage}></UserImage>
+
+        <RoomTitle
+          placeholder="채팅방 이름 작성.."
+          onChange={insertTitle}
+          value={newChatTitle}
+        ></RoomTitle>
+
+        {/* <HashTagWrapper>
+          <HashInput type="text" onKeyUp={handleEnter} />
+          <HashWrapOuter>
+            {hashArr.map((hash, index) => (
+              <HashWrapInner
+                key={index}
+                onClick={() => handleRemoveHash(index)}
+              >
+                {hash}
+              </HashWrapInner>
+            ))}
+          </HashWrapOuter>
+        </HashTagWrapper> */}
+
+        <ButtonBox>
+          <CreateButton onClick={buttonClick}>
+            <b> 개설 완료</b>
+          </CreateButton>
+          {/* <button onClick={buttonDelete}>임시 삭제버튼</button>
+          <button onClick={CheckInfo}>사용자 확인</button> */}
+          <CancleButton onClick={movetoBack}>
+            <b>개설 취소</b>
+          </CancleButton>
+        </ButtonBox>
+      </BodyBox>
+      <BottomBar IdOfUser={Id4}></BottomBar>
+    </>
+  );
 };
 
 export default CreateRoom;
