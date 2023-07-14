@@ -3,14 +3,22 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import breeze from "./breeze.png";
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
-const FullBox = styled.div`
-  margin: 3rem 2rem 2rem 2rem;
-  height: 20rem;
+const BreezeImgBox = styled.div`
+  margin-top: 2rem;
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const BreezeImg = styled.img`
+  width: 20rem;
+  height: auto;
 `;
 
 const SignupTextBox = styled.div`
@@ -19,10 +27,11 @@ const SignupTextBox = styled.div`
   width: 20rem;
 
 const SignupContainer = styled.div`
-    display : flex;
-    flex-direction : column;
-    align-items : center;
-  `
+  display: flex;
+  margin-top: -3rem;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const SignupText = styled.p`
   font-weight: bold;
@@ -38,27 +47,8 @@ const SignupText2 = styled.p`
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const NicknameBox = styled.div`
-  width: 18rem;
-  padding-bottom: 1rem;
-`;
-
-const NicknameText = styled.p`
-  font-size: 0.7rem;
-  margin: 0.2rem;
-  color: gray;
-  font-weight: bold;
-`;
-
-const NicknameInput = styled.input`
-  width: 10rem;
-  height: 1.5rem;
-  background-color: #d2ebf9;
-  border-radius: 2rem;
-  border-style: none;
-  box-shadow: 0rem 0.2rem 0.3rem gray;
+  align-items: center;
+  padding: 1rem;
 `;
 
 const IdBox = styled.div`
@@ -78,6 +68,9 @@ const IdInput = styled.input`
   height: 1.5rem;
   background-color: #d2ebf9;
   border-radius: 2rem;
+  background-color: #a5d7f4;
+  opacity: 0.5;
+  padding-left: 1rem;
   border-style: none;
   box-shadow: 0rem 0.2rem 0.3rem gray;
 `;
@@ -98,7 +91,9 @@ const PasswordInput = styled.input`
   background-color: #d2ebf9;
   border-radius: 2rem;
   border-style: none;
-  box-shadow: 0rem 0.2rem 0.3rem gray;
+  height: 2rem;
+  padding-left: 1rem;
+  box-shadow: 0rem 0.3rem 0.3rem gray;
 `;
 
 const ButtonBox = styled.div`
@@ -136,6 +131,12 @@ const CancelButton = styled.button`
 const CancelButtonText = styled.p`
   margin: 0;
   font-weight: bold;
+`;
+
+const SocialLoginText = styled.p`
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
 `;
 
 const SignupPage = (props) => {
@@ -177,16 +178,16 @@ const SignupPage = (props) => {
         console.log(Password); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (Password check)
         console.log(res);
         alert("회원가입이 완료되었습니다.");
-        navigate(`/login`)
+        navigate(`/login`);
       })
       .catch((e) => {
         // axios error check하는 코드
         console.log(e);
-        alert("아이디 중복입니다.")
+        alert("아이디 중복입니다.");
       });
   }
 
-  function BtnClick2(){
+  function BtnClick2() {
     setPassword("");
     setID("");
     alert("회원가입이 취소되었습니다.");
@@ -195,7 +196,10 @@ const SignupPage = (props) => {
 
   return (
     <>
-      <FullBox>
+      <BreezeImgBox>
+        <BreezeImg src={breeze}></BreezeImg>
+      </BreezeImgBox>
+      <SignupContainer>
         <SignupTextBox>
           <SignupText>회원가입</SignupText>
           <SignupText2>
@@ -204,28 +208,34 @@ const SignupPage = (props) => {
         </SignupTextBox>
 
         <InputBox>
-          <NicknameBox>
-            <NicknameText>닉네임 입력</NicknameText>
-            <NicknameInput></NicknameInput>
-          </NicknameBox>
           <IdBox>
             <IdText>아이디 입력</IdText>
             <IdInput></IdInput>
           </IdBox>
           <PasswordBox>
             <PasswordText>비밀번호 입력</PasswordText>
-            <PasswordInput></PasswordInput>
+            <PasswordInput
+              placeholder="Password"
+              type="password"
+              onChange={insertPassword}
+              value={Password}
+            ></PasswordInput>
           </PasswordBox>
         </InputBox>
         <ButtonBox>
           <CompleteButton>
-            <CompleteButtonText>가입 완료</CompleteButtonText>
+            <CompleteButtonText onClick={BtnClick}>
+              가입 완료
+            </CompleteButtonText>
           </CompleteButton>
           <CancelButton>
             <CancelButtonText>가입 취소</CancelButtonText>
           </CancelButton>
         </ButtonBox>
-      </FullBox>
+        <SocialLoginText>
+          <Link to={`/login`}>기존 계정으로 로그인</Link>
+        </SocialLoginText>
+      </SignupContainer>
     </>
   );
 };
