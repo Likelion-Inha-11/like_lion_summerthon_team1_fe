@@ -20,14 +20,6 @@ const BreezeImg = styled.img`
   height: auto;
 `;
 
-const ServiceName = styled.p`
-  font-size: 3rem;
-  margin: 2rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-`;
-
 const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -38,17 +30,10 @@ const LinkDiv = styled.div`
   flex-direction: column;
 `;
 
-const SignupLink = styled.div`
-  padding: 1rem 1.5rem 0rem 1rem;
-  font-size: 1rem;
-  display: flex;
-  justify-content: flex-end;
-`;
-
 const LoginButtonDiv = styled.div`
   display: flex;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 1rem;
 `;
 
 const LoginButton = styled.button`
@@ -72,7 +57,7 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem, 1rem, 1rem, 1rem;
 `;
 
 const IdBox = styled.div`
@@ -165,6 +150,10 @@ const LoginPage = (props) => {
       });
   }
 
+  function movetoSignup(){
+    navigate(`/signup`);
+  }
+
   return (
     <>
       <BreezeImgBox>
@@ -190,16 +179,17 @@ const LoginPage = (props) => {
           </PasswordBox>
         </InputBox>
       </LoginContainer>
-
-      <LinkDiv>
-        <SignupLink>
-          <Link to={`/signup`}>회원가입</Link>
-        </SignupLink>
-      </LinkDiv>
+      <br/>
 
       <LoginButtonDiv>
         <LoginButton onClick={BtnClick}>
           <LoginButtonText>로그인</LoginButtonText>
+        </LoginButton>
+      </LoginButtonDiv>
+
+      <LoginButtonDiv>
+        <LoginButton onClick={movetoSignup}>
+          <LoginButtonText>회원가입</LoginButtonText>
         </LoginButton>
       </LoginButtonDiv>
     </>
