@@ -3,88 +3,102 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import breeze from "./breeze.png";
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
+const BreezeImgBox = styled.div`
+  margin-top: 2rem;
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const BreezeImg = styled.img`
+  width: 20rem;
+  height: auto;
+`;
+
 const SignupTextBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 15rem;
-  padding: 3rem 0 0.5rem 1rem;
-`;
+  width: 20rem;
 
 const SignupContainer = styled.div`
-    display : flex;
-    flex-direction : column;
-    align-items : center;
-  `
+  display: flex;
+  margin-top: -3rem;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const SignupText = styled.p`
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   margin: 0;
 `;
 
 const SignupText2 = styled.p`
   font-weight: bold;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
 `;
 
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
-  align-items : center;
+  align-items: center;
   padding: 1rem;
 `;
 
 const IdBox = styled.div`
-  width: 14rem;
+  width: 18rem;
   padding-bottom: 1rem;
 `;
 
 const IdText = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  margin: 0.2rem;
   color: gray;
   font-weight: bold;
 `;
 
 const IdInput = styled.input`
-  width: 13rem;
+  width: 10rem;
+  height: 1.5rem;
+  background-color: #d2ebf9;
   border-radius: 2rem;
   background-color: #a5d7f4;
   opacity: 0.5;
-  padding-left : 1rem;
+  padding-left: 1rem;
   border-style: none;
-  height: 2rem;
-  box-shadow: 0rem 0.3rem 0.3rem gray;
+  box-shadow: 0rem 0.2rem 0.3rem gray;
 `;
 
 const PasswordBox = styled.div`
-  width: 14rem;
+  width: 18rem;
+  padding-bottom: 1rem;
 `;
 
 const PasswordText = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  margin: 0.2rem;
   color: gray;
-  font-weight: bold;
-`;
 
 const PasswordInput = styled.input`
-  width: 13rem;
+  width: 10rem;
+  height: 1.5rem;
+  background-color: #d2ebf9;
   border-radius: 2rem;
-  background-color: #a5d7f4;
-  opacity: 0.5;
   border-style: none;
   height: 2rem;
-  padding-left : 1rem;
+  padding-left: 1rem;
   box-shadow: 0rem 0.3rem 0.3rem gray;
 `;
 
 const ButtonBox = styled.div`
   display: flex;
-  margin-top: 2.5rem;
+  margin-top: 3rem;
   width: 14rem;
   height: 3rem;
   /* background-color: coral; */
@@ -120,9 +134,9 @@ const CancelButtonText = styled.p`
 `;
 
 const SocialLoginText = styled.p`
-display: flex;
-justify-content: center;
-padding-top : 1rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
 `;
 
 const SignupPage = (props) => {
@@ -164,16 +178,16 @@ const SignupPage = (props) => {
         console.log(Password); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (Password check)
         console.log(res);
         alert("회원가입이 완료되었습니다.");
-        navigate(`/login`)
+        navigate(`/login`);
       })
       .catch((e) => {
         // axios error check하는 코드
         console.log(e);
-        alert("아이디 중복입니다.")
+        alert("아이디 중복입니다.");
       });
   }
 
-  function BtnClick2(){
+  function BtnClick2() {
     setPassword("");
     setID("");
     alert("회원가입이 취소되었습니다.");
@@ -182,41 +196,46 @@ const SignupPage = (props) => {
 
   return (
     <>
+      <BreezeImgBox>
+        <BreezeImg src={breeze}></BreezeImg>
+      </BreezeImgBox>
       <SignupContainer>
-
         <SignupTextBox>
           <SignupText>회원가입</SignupText>
           <SignupText2>
-            환영합니다! 회원이 되어 다양한 서비스를 누려보세요
+            환영합니다 회원이 되어 다양한 서비스를 누려보세요
           </SignupText2>
         </SignupTextBox>
 
         <InputBox>
-
           <IdBox>
             <IdText>아이디 입력</IdText>
-            <IdInput placeholder="ID" onChange={insertId} value={Id}></IdInput>
+            <IdInput></IdInput>
           </IdBox>
-
           <PasswordBox>
             <PasswordText>비밀번호 입력</PasswordText>
-            <PasswordInput placeholder="Password" type="password" onChange={insertPassword} value={Password}></PasswordInput>
+            <PasswordInput
+              placeholder="Password"
+              type="password"
+              onChange={insertPassword}
+              value={Password}
+            ></PasswordInput>
           </PasswordBox>
-
         </InputBox>
-
         <ButtonBox>
           <CompleteButton>
-            <CompleteButtonText onClick={BtnClick}>가입 완료</CompleteButtonText>
+            <CompleteButtonText onClick={BtnClick}>
+              가입 완료
+            </CompleteButtonText>
           </CompleteButton>
           <CancelButton>
-            <CancelButtonText onClick={BtnClick2}>가입 취소</CancelButtonText>
+            <CancelButtonText>가입 취소</CancelButtonText>
           </CancelButton>
         </ButtonBox>
-
-        <SocialLoginText><Link to={`/login`}>기존 계정으로 로그인</Link></SocialLoginText>
-        
-        </SignupContainer>
+        <SocialLoginText>
+          <Link to={`/login`}>기존 계정으로 로그인</Link>
+        </SocialLoginText>
+      </SignupContainer>
     </>
   );
 };
