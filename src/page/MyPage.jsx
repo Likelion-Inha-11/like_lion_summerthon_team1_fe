@@ -47,12 +47,12 @@ const MyPage = () => {
       <MyHeader UserInfo={UserInfo} UserImage={UserTestImage}></MyHeader>
       <MyPageBody UserInfo={UserInfo}></MyPageBody>
       <BottomBar IdOfUser={Id3}></BottomBar>
-
       <BreezeImgBox>
         <BreezeImg src={breeze}></BreezeImg>
       </BreezeImgBox>
     </div>
   );
+
 };
 
 export default MyPage;
