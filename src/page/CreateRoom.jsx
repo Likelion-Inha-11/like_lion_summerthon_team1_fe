@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 import { useState } from "react";
 import BottomBar from "./component/SearchPageCom/bottomBar";
 import { useNavigate, useParams } from "react-router-dom";
