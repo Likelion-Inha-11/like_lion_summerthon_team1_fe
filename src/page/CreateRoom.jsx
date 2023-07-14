@@ -12,50 +12,50 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
-const hashDivrap = css`
-  margin-top: 24px;
-  color: rgb(52, 58, 64);
-  font-size: 1.125rem;
-  display: flex;
-  flex-wrap: wrap;
-  letter-spacing: -0.6px;
-  color: #444241;
-  border-bottom: 1.6px solid gray;
-  padding: 2px 2px 8px 2px;
+// const hashDivrap = css`
+//   margin-top: 24px;
+//   color: rgb(52, 58, 64);
+//   font-size: 1.125rem;
+//   display: flex;
+//   flex-wrap: wrap;
+//   letter-spacing: -0.6px;
+//   color: #444241;
+//   border-bottom: 1.6px solid gray;
+//   padding: 2px 2px 8px 2px;
 
-  .HashWrapOuter {
-    display: flex;
-    flex-wrap: wrap;
-  }
+//   .HashWrapOuter {
+//     display: flex;
+//     flex-wrap: wrap;
+//   }
 
-  .HashWrapInner {
-    margin-top: 5px;
-    background: #ffeee7;
-    border-radius: 56px;
-    padding: 8px 12px;
-    color: #ff6e35;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 8px;
-    line-height: 20px;
-    margin-right: 5px;
-    cursor: pointer;
-  }
+//   .HashWrapInner {
+//     margin-top: 5px;
+//     background: #ffeee7;
+//     border-radius: 56px;
+//     padding: 8px 12px;
+//     color: #ff6e35;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     font-weight: bold;
+//     font-size: 8px;
+//     line-height: 20px;
+//     margin-right: 5px;
+//     cursor: pointer;
+//   }
 
-  .HashInput {
-    width: 3rem;
-    margin: 10px;
-    display: inline-flex;
-    outline: none;
-    cursor: text;
-    line-height: 2rem;
-    margin-bottom: 0.75rem;
-    min-width: 8rem;
-    border: none;
-  }
-`;
+//   .HashInput {
+//     width: 3rem;
+//     margin: 10px;
+//     display: inline-flex;
+//     outline: none;
+//     cursor: text;
+//     line-height: 2rem;
+//     margin-bottom: 0.75rem;
+//     min-width: 8rem;
+//     border: none;
+//   }
+// `;
 
 // const HashTagWrapper = styled.div`
 //   ${hashDivrap}
@@ -151,7 +151,7 @@ const CreateRoom = () => {
   const { Id4 } = useParams();
 
   const [newChatTitle, setTitle] = useState("");
-  const [RoomId, setRoomId] = useState();
+  // const [RoomId, setRoomId] = useState();
 
   // const [hashArr, setHashArr] = useState([]);
 
