@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import breeze from "./breeze.png";
 
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
@@ -25,7 +25,7 @@ const SignupTextBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 20rem;
-`;
+  `;
 
 const SignupContainer = styled.div`
   display: flex;
