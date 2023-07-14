@@ -2,8 +2,11 @@ import React from 'react';
 import { styled } from 'styled-components';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import ChatImage from './chatImage.jpg';
 // import { useNavigate } from 'react-router-dom';
 //css추가 필요
+//import testImage from './components/MainPage/testImage.jpg';
+
 
 const EveryChatBox = styled.div`
     display: flex;
@@ -132,7 +135,7 @@ const CardList = (props) => {//cardList -> 각 채팅방 카드 sorting/ map으�
                 //div에 onClink={()=>navigate(route 링크)}로 각 채팅방에 들어갈 수 있도록 수정 필요
                     <EachChatBox key={eachData.id}>
                         {/* <EachChatRank>{++rankCount}</EachChatRank> */}
-                        <EachChatLink src={eachData.image} alt={eachData.name}></EachChatLink>
+                        <EachChatLink src={ChatImage} alt={eachData.name}></EachChatLink>
                         <EachChatName>{eachData.name}</EachChatName>
                         <EachChatButton onClick={()=>eachChatClick(eachData.id)}>채팅방 입장하기</EachChatButton>
                     </EachChatBox>

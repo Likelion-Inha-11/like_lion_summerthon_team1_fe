@@ -32,6 +32,8 @@ const MyPage = () => {
         <div>
             <MyHeader UserInfo={UserInfo} UserImage={UserTestImage}></MyHeader>
             <MyPageBody UserInfo={UserInfo}></MyPageBody>
+            <br/>
+            <br/>
             <BottomBar IdOfUser={Id3}></BottomBar>
         </div>
     );
