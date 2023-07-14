@@ -168,12 +168,13 @@ const SignupPage = (props) => {
       alert("비밀번호를 입력하세요.");
       return;
     }
+    // ${process.env.REACT_APP_API}
 
     axios
-      .post(`${process.env.REACT_APP_API}/signup/`, {
+      .post(`https://breeze.r-e.kr/signup/`, {
         // 입력된 userID 와 password 정보를 post로 넘겨주는 코드
         userID: Id,
-        password: Password,
+        password: Password
       })
       .then((res) => {
         console.log(Id); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (ID check)
@@ -212,7 +213,12 @@ const SignupPage = (props) => {
         <InputBox>
           <IdBox>
             <IdText>아이디 입력</IdText>
-            <IdInput></IdInput>
+            <IdInput
+              placeholder="Id"
+              type="text"
+              onChange={insertId}
+              value={Id}
+            ></IdInput>
           </IdBox>
           <PasswordBox>
             <PasswordText>비밀번호 입력</PasswordText>

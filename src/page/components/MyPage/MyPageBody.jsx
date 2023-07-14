@@ -84,7 +84,7 @@ const MyPageBody = () => {
 
     useEffect(()=>{
         axios
-            .get(`${process.env.REACT_APP_API}/user_info/${Id3}/`)
+            .get(`${process.env.REACT_APP_API}/my_info/`)
             .then((res)=>{
                 setMyRoom(res.data.rooms);
             })
