@@ -7,7 +7,7 @@ import SearchBar from "./component/SearchPageCom/searchBar";
 import { useParams } from "react-router-dom";
 import breeze from "./breeze.png";
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
