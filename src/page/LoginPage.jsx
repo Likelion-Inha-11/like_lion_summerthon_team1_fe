@@ -39,7 +39,7 @@ const LoginButtonDiv = styled.div`
 const LoginButton = styled.button`
   background-color: skyblue;
   width: 15rem;
-  height: 4rem;
+  height: 3.5rem;
   border-radius: 1rem;
   border: 0;
   box-shadow: 0rem 0.3rem 0.3rem gray;
