@@ -193,7 +193,7 @@ const CreateRoom = () => {
         {
           name: newChatTitle,
           user: [Id4],
-          category: 2,
+          category: 1,
         },
         {
           headers: {
