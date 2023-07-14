@@ -151,7 +151,7 @@ const CreateRoom = () => {
   const { Id4 } = useParams();
 
   const [newChatTitle, setTitle] = useState("");
-  // const [RoomId, setRoomId] = useState();
+  const [RoomId, setRoomId] = useState();
 
   // const [hashArr, setHashArr] = useState([]);
 
@@ -204,6 +204,7 @@ const CreateRoom = () => {
       .then((res) => {
         console.log(res);
         setRoomId(res.data.room_id);
+        console.log(RoomId);
         alert("개설이 완료되었습니다.");
       })
       .catch((e) => {
