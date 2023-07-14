@@ -3,10 +3,11 @@ import axios from "axios";
 import { styled, css } from "styled-components";
 import { useState } from "react";
 import BottomBar from "./component/SearchPageCom/bottomBar";
-import { useNavigate, Navigate, useParams } from "react-router-dom";
-import MyHeader from "./components/MyPage/MyHeader";
+import { useNavigate, useParams } from "react-router-dom";
+// import MyHeader from "./components/MyPage/MyHeader";
 import UserTestImage from "./components/MyPage/UserTestImage.jpg";
 import { UserImage } from "./components/MyPage/MyHeader";
+
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
@@ -56,42 +57,42 @@ const hashDivrap = css`
   }
 `;
 
-const HashTagWrapper = styled.div`
-  ${hashDivrap}
-`;
+// const HashTagWrapper = styled.div`
+//   ${hashDivrap}
+// `;
 
-const HashWrapOuter = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
+// const HashWrapOuter = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+// `;
 
-const HashWrapInner = styled.div`
-  margin-top: 5px;
-  background: #ededed;
-  border-radius: 56px;
-  padding: 8px;
-  color: #89baff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  font-size: 8px;
-  line-height: 10px;
-  margin-right: 5px;
-  cursor: pointer;
-`;
+// const HashWrapInner = styled.div`
+//   margin-top: 5px;
+//   background: #ededed;
+//   border-radius: 56px;
+//   padding: 8px;
+//   color: #89baff;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-weight: bold;
+//   font-size: 8px;
+//   line-height: 10px;
+//   margin-right: 5px;
+//   cursor: pointer;
+// `;
 
-const HashInput = styled.input`
-  width: auto;
-  margin: 10px;
-  display: inline-flex;
-  outline: none;
-  cursor: text;
-  line-height: 2rem;
-  margin-bottom: 0.75rem;
-  min-width: 8rem;
-  border: none;
-`;
+// const HashInput = styled.input`
+//   width: auto;
+//   margin: 10px;
+//   display: inline-flex;
+//   outline: none;
+//   cursor: text;
+//   line-height: 2rem;
+//   margin-bottom: 0.75rem;
+//   min-width: 8rem;
+//   border: none;
+// `;
 
 const BodyBox = styled.div`
   display: flex;
@@ -152,37 +153,37 @@ const CreateRoom = () => {
   const [newChatTitle, setTitle] = useState("");
   const [RoomId, setRoomId] = useState();
 
-  const [hashArr, setHashArr] = useState([]);
+  // const [hashArr, setHashArr] = useState([]);
 
-  const handleEnter = (e) => {
-    if (e.keyCode === 13 && e.target.value.trim() !== "") {
-      const newHash = "#" + e.target.value;
-      setHashArr((prevHashArr) => [...prevHashArr, newHash]);
-      e.target.value = "";
-    }
-  };
+  // const handleEnter = (e) => {
+  //   if (e.keyCode === 13 && e.target.value.trim() !== "") {
+  //     const newHash = "#" + e.target.value;
+  //     setHashArr((prevHashArr) => [...prevHashArr, newHash]);
+  //     e.target.value = "";
+  //   }
+  // };
 
-  const handleRemoveHash = (index) => {
-    setHashArr((prevHashArr) => prevHashArr.filter((_, i) => i !== index));
-  };
+  // const handleRemoveHash = (index) => {
+  //   setHashArr((prevHashArr) => prevHashArr.filter((_, i) => i !== index));
+  // };
 
   function insertTitle(e) {
     setTitle(e.target.value);
     console.log(newChatTitle);
   }
 
-  function RoomEnter() {
-    axios
-      .post(`${process.env.REACT_APP_API}/${RoomId}/enter/`)
-      .then(() => {
-        console.log("Room enter!");
-      })
-      .catch((e) => {
-        console.log("Cannot Enter!");
-        console.log(RoomId);
-        console.log(e);
-      });
-  }
+  // function RoomEnter() {
+  //   axios
+  //     .post(`${process.env.REACT_APP_API}/${RoomId}/enter/`)
+  //     .then(() => {
+  //       console.log("Room enter!");
+  //     })
+  //     .catch((e) => {
+  //       console.log("Cannot Enter!");
+  //       console.log(RoomId);
+  //       console.log(e);
+  //     });
+  // }
 
   function buttonClick() {
     const token = "token"; // replace with your actual token
@@ -212,28 +213,28 @@ const CreateRoom = () => {
       });
   }
 
-  function buttonDelete() {
-    axios
-      .delete(`${process.env.REACT_APP_API}/room/2/`)
-      .then(() => {
-        console.log("삭제완료!");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
+  // function buttonDelete() {
+  //   axios
+  //     .delete(`${process.env.REACT_APP_API}/room/2/`)
+  //     .then(() => {
+  //       console.log("삭제완료!");
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }
 
-  function CheckInfo() {
-    axios
-      .get(`${process.env.REACT_APP_API}/my_info/`)
-      .then((res) => {
-        console.log("사용자 정보");
-        console.log(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
+  // function CheckInfo() {
+  //   axios
+  //     .get(`${process.env.REACT_APP_API}/my_info/`)
+  //     .then((res) => {
+  //       console.log("사용자 정보");
+  //       console.log(res);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }
 
   function movetoBack() {
     navigate(-1);

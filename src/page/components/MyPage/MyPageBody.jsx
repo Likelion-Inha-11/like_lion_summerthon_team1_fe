@@ -71,9 +71,9 @@ const MyPageBody = () => {
                 console.log(res);
                 const roomArray = res.data.filter(data => data.user.includes(Id3));
                 console.log(roomArray);
-                roomArray = roomArray.filter(data => data.is_public===true);
-                console.log(roomArray);
-                setRoomList(roomArray);
+                const roomArray2 = roomArray.filter(data => data.is_public===true);
+                console.log(roomArray2);
+                setRoomList(roomArray2);
                 // console.log('room list');
                 // setRoomList(res.data);
             })

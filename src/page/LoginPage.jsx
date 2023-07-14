@@ -20,13 +20,13 @@ const BreezeImg = styled.img`
   height: auto;
 `;
 
-const ServiceName = styled.p`
-  font-size: 3rem;
-  margin: 2rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-`;
+// const ServiceName = styled.p`
+//   font-size: 3rem;
+//   margin: 2rem;
+//   font-weight: bold;
+//   display: flex;
+//   justify-content: center;
+// `;
 
 const LoginContainer = styled.div`
   display: flex;

@@ -54,11 +54,11 @@ const ChatPage = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)} // 사용자 입력을 message 상태에 저장
         />
-        <button type="submit">Send Message</button> // 버튼 클릭 시 handleChat
-        함수 호출
+        <button type="submit">Send Message</button> 
+        {/* // 버튼 클릭 시 handleChat함수 호출 */}
       </form>
-      <Link to="http://localhost:3000/">Go Back</Link> // 이전 페이지로 돌아가는
-      링크
+      <Link to="http://localhost:3000/">Go Back</Link> 
+      {/* // 이전 페이지로 돌아가는링크 */}
     </>
   );
 };

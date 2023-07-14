@@ -190,12 +190,12 @@ const SignupPage = (props) => {
       });
   }
 
-  function BtnClick2() {
-    setPassword("");
-    setID("");
-    alert("회원가입이 취소되었습니다.");
-    navigate(`/login`);
-  }
+  // function BtnClick2() {
+  //   setPassword("");
+  //   setID("");
+  //   alert("회원가입이 취소되었습니다.");
+  //   navigate(`/login`);
+  // }
 
   return (
     <>
