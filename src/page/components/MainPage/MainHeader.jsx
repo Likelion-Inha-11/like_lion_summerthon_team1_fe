@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 const HeaderContainer = styled.div`
     display: flex;
@@ -26,32 +26,17 @@ const CreateButton = styled.button`
     top: 1rem;
 `;
 
+const MainHeader = (props) => {
 
-
-const MainHeader = () => {
-
-    useEffect(()=>{
-        axios
-            .get(`http://54.180.85.255/room_list_create/`)
-            .then((res)=>{
-                console.log(res);
-            })
-            .catch((error)=>{
-                console.log(error);
-            });
-    },[]);
-    // const navigate = useNavigate();
-
-    
-    //버튼에 onClink={()=>navigate()} 추가
+    const navigate = useNavigate();
+  
     return (
         <>
             <HeaderContainer>
-                <ChatName>ㅇㅇ챗</ChatName>
-                <CreateButton>개설하기</CreateButton>
+                <ChatName>breeze</ChatName>
+                <CreateButton onClick={()=>navigate(`/create/${props.IdOfUser}`)}>개설하기</CreateButton>
             </HeaderContainer>
         </>
-            
     );
 };
 

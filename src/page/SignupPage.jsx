@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.withCredentials = true;
 
 const FullBox = styled.div`
   margin: 3rem 2rem 2rem 2rem;
@@ -13,7 +17,12 @@ const SignupTextBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 20rem;
-`;
+
+const SignupContainer = styled.div`
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+  `
 
 const SignupText = styled.p`
   font-weight: bold;
@@ -40,6 +49,7 @@ const NicknameText = styled.p`
   font-size: 0.7rem;
   margin: 0.2rem;
   color: gray;
+  font-weight: bold;
 `;
 
 const NicknameInput = styled.input`
@@ -58,10 +68,9 @@ const IdBox = styled.div`
 
 const IdText = styled.p`
   font-size: 0.7rem;
-
   margin: 0.2rem;
-
   color: gray;
+  font-weight: bold;
 `;
 
 const IdInput = styled.input`
@@ -82,7 +91,6 @@ const PasswordText = styled.p`
   font-size: 0.7rem;
   margin: 0.2rem;
   color: gray;
-`;
 
 const PasswordInput = styled.input`
   width: 10rem;
@@ -133,32 +141,56 @@ const CancelButtonText = styled.p`
 const SignupPage = (props) => {
   const [Id, setID] = useState(""); // ID 저장용 useState
   const [Password, setPassword] = useState(""); //Password 저장용 useState
+  const navigate = useNavigate();
 
   function insertId(e) {
     // 입력된 ID 받아오는 함수
     setID(e.target.value);
+    console.log(e.target.value);
   }
 
   function insertPassword(e) {
     // 입력된 Password 받아오는 함수
     setPassword(e.target.value);
+    console.log(e.target.value);
   }
 
   function BtnClick() {
+    if (Id === "") {
+      alert("아이디를 입력하세요.");
+      return;
+    }
+
+    if (Password === "") {
+      alert("비밀번호를 입력하세요.");
+      return;
+    }
+
     axios
-      .post("http://54.180.85.255/signup/", {
+      .post(`${process.env.REACT_APP_API}/signup/`, {
         // 입력된 userID 와 password 정보를 post로 넘겨주는 코드
         userID: Id,
         password: Password,
       })
-      .then(() => {
+      .then((res) => {
         console.log(Id); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (ID check)
         console.log(Password); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (Password check)
+        console.log(res);
+        alert("회원가입이 완료되었습니다.");
+        navigate(`/login`)
       })
       .catch((e) => {
         // axios error check하는 코드
         console.log(e);
+        alert("아이디 중복입니다.")
       });
+  }
+
+  function BtnClick2(){
+    setPassword("");
+    setID("");
+    alert("회원가입이 취소되었습니다.");
+    navigate(`/login`);
   }
 
   return (
