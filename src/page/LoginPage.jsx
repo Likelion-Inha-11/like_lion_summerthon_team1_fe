@@ -2,63 +2,76 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import breeze from "./breeze.png";
 
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
+const BreezeImgBox = styled.div`
+  width: auto;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const BreezeImg = styled.img`
+  width: 20rem;
+  height: auto;
+`;
+
 const ServiceName = styled.p`
-    font-size: 3rem;
-    margin: 2rem;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-  `;
+  font-size: 3rem;
+  margin: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+`;
 
-  const LoginContainer = styled.div`
-    display : flex;
-    flex-direction : column;
-    align-items : center;
-  `
-  const LinkDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-  `;
+const LoginContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const LinkDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-  const SignupLink = styled.div`
-    padding: 1rem 1.5rem 0rem 1rem;
-    font-size: 1rem;
-    display: flex;
-    justify-content: flex-end;
-  `;
+const SignupLink = styled.div`
+  padding: 1rem 1.5rem 0rem 1rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: flex-end;
+`;
 
-  const LoginButtonDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    padding: 2rem 0;
-  `;
+const LoginButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+`;
 
-  const LoginButton = styled.button`
-    background-color: skyblue;
-    width: 15rem;
-    height: 4rem;
-    border-radius: 1rem;
-    border: 0;
-    box-shadow: 0rem 0.3rem 0.3rem gray;
-  `;
+const LoginButton = styled.button`
+  background-color: skyblue;
+  width: 15rem;
+  height: 4rem;
+  border-radius: 1rem;
+  border: 0;
+  box-shadow: 0rem 0.3rem 0.3rem gray;
+`;
 
-  const LoginButtonText = styled.p`
-    font-size: 1.5rem;
-    font-weight: bold;
-    display: flex;
-    margin: 0;
-    justify-content: center;
-  `;
+const LoginButtonText = styled.p`
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  margin: 0;
+  justify-content: center;
+`;
 
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
-  align-items : center;
+  align-items: center;
   padding: 1rem;
 `;
 
@@ -78,7 +91,7 @@ const IdInput = styled.input`
   border-radius: 2rem;
   background-color: #a5d7f4;
   opacity: 0.5;
-  padding-left : 1rem;
+  padding-left: 1rem;
   border-style: none;
   height: 2rem;
   box-shadow: 0rem 0.3rem 0.3rem gray;
@@ -101,7 +114,7 @@ const PasswordInput = styled.input`
   opacity: 0.5;
   border-style: none;
   height: 2rem;
-  padding-left : 1rem;
+  padding-left: 1rem;
   box-shadow: 0rem 0.3rem 0.3rem gray;
 `;
 
@@ -115,7 +128,7 @@ const LoginPage = (props) => {
     // 입력된 ID 받아오는 함수
 
     setId(e.target.value);
-  }
+  };
 
   const insertPassword = (e) => {
     // 입력된 Password 받아오는 함수
@@ -148,18 +161,19 @@ const LoginPage = (props) => {
       .catch((e) => {
         // axios error check하는 코드
         console.log(e);
-        alert("일치하는 회원 정보가 없습니다.")
+        alert("일치하는 회원 정보가 없습니다.");
       });
-  };
+  }
 
   return (
     <>
-      <ServiceName>breeze</ServiceName>
+      <BreezeImgBox>
+        <BreezeImg src={breeze}></BreezeImg>
+      </BreezeImgBox>
+      {/* <ServiceName>breeze</ServiceName> */}
 
       <LoginContainer>
-
-      <InputBox>
-
+        <InputBox>
           <IdBox>
             <IdText>아이디 입력</IdText>
             <IdInput placeholder="ID" onChange={insertId} value={id}></IdInput>
@@ -167,11 +181,14 @@ const LoginPage = (props) => {
 
           <PasswordBox>
             <PasswordText>비밀번호 입력</PasswordText>
-            <PasswordInput placeholder="Password" type="password" onChange={insertPassword} value={password}></PasswordInput>
+            <PasswordInput
+              placeholder="Password"
+              type="password"
+              onChange={insertPassword}
+              value={password}
+            ></PasswordInput>
           </PasswordBox>
-          
         </InputBox>
-
       </LoginContainer>
 
       <LinkDiv>
@@ -185,7 +202,6 @@ const LoginPage = (props) => {
           <LoginButtonText>로그인</LoginButtonText>
         </LoginButton>
       </LoginButtonDiv>
-
     </>
   );
 };
