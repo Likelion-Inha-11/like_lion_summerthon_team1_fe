@@ -9,12 +9,12 @@ library.add(faHome, faSearch, faUser);
 const SearchContainer = styled.div`
   display : flex;
   align-items : center;
-  width: 20rem;
+  width: 19rem;
   height: 4rem;
   position: relative;
   border: 0;
   margin-left : 30px;
-  margin-top : 10px;
+  margin-top : 20px;
 `
 const SearchForm = styled.form`
   width : 100%;
@@ -61,6 +61,30 @@ const AutoSearchData = styled.li`
     cursor: pointer;
   }
   position: relative;
+`;
+
+const SearchResultContainer = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 20.4rem;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1;
+`;
+
+const SearchResultItem = styled.li`
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  cursor: pointer;
+  &:hover {
+    background-color: #f5f5f5;
+  }
 `;
 
 const SearchBar = ({ onSearch }) => {
@@ -156,15 +180,18 @@ const SearchBar = ({ onSearch }) => {
             </AutoSearchContainer>
           )}
 
-<br/>
-<br/>
-          <ul>
-            {/* 검색 결과창 */}
-          {searchResults.map((result) => (
-          <li key={result.id}>{result.name}</li>
-          ))}
+          <br/>
+          <br/>
 
-          </ul>
+            {searchResults.length > 0 && (
+              <SearchResultContainer>
+                <ul>
+                  {searchResults.map((result) => (
+                  <SearchResultItem key={result.id}>{result.name}</SearchResultItem>
+                  ))}
+                </ul>
+              </SearchResultContainer>
+            )}
 
         </SearchForm>
       </SearchContainer>
