@@ -13,17 +13,17 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
-const BreezeImgBox = styled.div`
-  width: auto;
-  margin-top: 2rem;
-  display: flex;
-  justify-content: space-around;
-`;
+// const BreezeImgBox = styled.div`
+//   width: auto;
+//   margin-top: 2rem;
+//   display: flex;
+//   justify-content: space-around;
+// `;
 
-const BreezeImg = styled.img`
-  width: 20rem;
-  height: auto;
-`;
+// const BreezeImg = styled.img`
+//   width: 20rem;
+//   height: auto;
+// `;
 
 const MyPage = () => {
   const { Id3 } = useParams();
@@ -31,7 +31,7 @@ const MyPage = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API}/mypage/${Id3}/`)
+      .get(`${process.env.REACT_APP_API}/my_info/`)
       .then((res) => {
         console.log(res);
         setUserInfo(res.data);
@@ -47,9 +47,9 @@ const MyPage = () => {
       <MyHeader UserInfo={UserInfo} UserImage={UserTestImage}></MyHeader>
       <MyPageBody UserInfo={UserInfo}></MyPageBody>
       <BottomBar IdOfUser={Id3}></BottomBar>
-      <BreezeImgBox>
+      {/* <BreezeImgBox>
         <BreezeImg src={breeze}></BreezeImg>
-      </BreezeImgBox>
+      </BreezeImgBox> */}
     </div>
   );
 

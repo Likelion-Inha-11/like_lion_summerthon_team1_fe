@@ -8,6 +8,8 @@ const ChatList2Container = styled.div`
     background: rgba(165, 215, 244, 0.39);
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
     margin:  0 2rem 0 2rem;
+    overflow: auto;
+    max-height: 24.5rem;
 `;
 
 const ChatListName = styled.h3`

@@ -69,7 +69,7 @@ const MyPageBody = () => {
             .get(`${process.env.REACT_APP_API}/room_list_create/`)
             .then((res)=>{
                 console.log(res);
-                const roomArray = res.data.filter(data => data.user.includes(Id3));
+                const roomArray = res.data.filter(object => object.user.includes(Id3));
                 console.log(roomArray);
                 const roomArray2 = roomArray.filter(data => data.is_public===true);
                 console.log(roomArray2);
@@ -114,7 +114,7 @@ const MyPageBody = () => {
             <ChatListTitle>참여한 채팅방 목록</ChatListTitle>
             <ChatCardDiv>
                 {
-                roomList.length===0?<NoChat>현재 참여한 공개 채팅방이 없습니다.</NoChat>:
+                roomList.length===0?<NoChat>현재 참여한 비공개 채팅방이 없습니다.</NoChat>:
                 roomList.map((eachRoom)=>(
                     <ChatCard onClick={()=>ChatCardClick(eachRoom.id)}>
                         <ChatImage></ChatImage>
@@ -127,7 +127,7 @@ const MyPageBody = () => {
             <ChatListTitle>나의 채팅방 목록</ChatListTitle>
             <ChatCardDiv>
                 {
-                myRoomList.length===0?<NoChat>현재 참여한 비공개 채팅방이 없습니다.</NoChat>:
+                myRoomList.length===0?<NoChat>현재 참여한 공개 채팅방이 없습니다.</NoChat>:
                 myRoomList.map((eachRoom)=>(
                     <ChatCard>
                         <ChatImage></ChatImage>

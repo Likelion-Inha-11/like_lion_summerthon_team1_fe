@@ -127,6 +127,13 @@ const CreateButton = styled.button`
   border-radius: 0.3rem;
   background-color: #d2ebf9;
   box-shadow: 0rem 0.2rem 0.3rem gray;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-around;
+    align-items: center;
+  text-decoration: none;
+  color: black;
 `;
 
 const ButtonBox = styled.div`
@@ -174,9 +181,10 @@ const CreateRoom = () => {
 
   // function RoomEnter() {
   //   axios
-  //     .post(`${process.env.REACT_APP_API}/${RoomId}/enter/`)
+  //     .post(`${process.env.REACT_APP_API}/room/${RoomId}/enter/`)
   //     .then(() => {
   //       console.log("Room enter!");
+  //       navigate(-1);
   //     })
   //     .catch((e) => {
   //       console.log("Cannot Enter!");
@@ -193,7 +201,7 @@ const CreateRoom = () => {
         {
           name: newChatTitle,
           user: [Id4],
-          category: 2,
+          category: 1,
         },
         {
           headers: {
@@ -205,7 +213,9 @@ const CreateRoom = () => {
         console.log(res);
         setRoomId(res.data.room_id);
         console.log(RoomId);
+        // RoomEnter();
         alert("개설이 완료되었습니다.");
+        navigate(-1);
       })
       .catch((e) => {
         console.log(e);
@@ -269,9 +279,14 @@ const CreateRoom = () => {
         </HashTagWrapper> */}
 
         <ButtonBox>
+          {/* <CreateButton href="https://breeze.r-e.kr/room_chat/ds/">
+            개설 완료
+          </CreateButton> */}
           <CreateButton onClick={buttonClick}>
-            <b> 개설 완료</b>
+            개설 완료
           </CreateButton>
+          {/* <button onClick={RoomEnter}>방 개설하기</button> */}
+
           {/* <button onClick={buttonDelete}>임시 삭제버튼</button>
           <button onClick={CheckInfo}>사용자 확인</button> */}
           <CancleButton onClick={movetoBack}>

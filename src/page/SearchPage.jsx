@@ -13,13 +13,13 @@ axios.defaults.withCredentials = true;
 
 const BreezeImgBox = styled.div`
   width: auto;
-  margin-top: 2rem;
+  margin-top: 14rem;
   display: flex;
   justify-content: space-around;
 `;
 
 const BreezeImg = styled.img`
-  width: 20rem;
+  width: 10rem;
   height: auto;
 `;
 
@@ -33,6 +33,7 @@ const SearchPage = () => {
       <BreezeImgBox>
         <BreezeImg src={breeze}></BreezeImg>
       </BreezeImgBox>
+
     </>
   );
 };

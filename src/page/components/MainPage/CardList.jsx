@@ -68,7 +68,7 @@ const EachChatButton = styled.button`
 // `;
 
 const CardList = (props) => {//cardList -> 각 채팅방 카드 sorting/ map으로 띄우기
-
+    const [roomName, setRoomName] = useState();
     // 각 채팅방을 클릭했을 때 각 채팅방으로 이동할 수 있도록 useNavigate 사용
     // const navigate = useNavigate();
 
@@ -114,19 +114,21 @@ const CardList = (props) => {//cardList -> 각 채팅방 카드 sorting/ map으�
     }
     },[roomList, props.SortOption])//Sort 기준이 바뀔 때마다 실행
 
-    function eachChatClick(roomId){ //각 채팅방 클릭했을 때 enter+채팅방으로 이동
-        axios
-            .post(`${process.env.REACT_APP_API}/room/${roomId}/enter/`)
-            .then(()=>{
-                console.log('Room enter!');
-                // navigate(`/chat/${roomId}`); 각 채팅방으로 이동
-            })
-            .catch((e)=>{
-                console.log('Cannot Enter!');
-                console.log(roomId);
-                console.log(e);
-            });
-    };
+    // function eachChatClick(roomId){ //각 채팅방 클릭했을 때 enter+채팅방으로 이동
+    //     axios
+    //         .get(`${process.env.REACT_APP_API}/room/${roomId}/`)
+    //         .then((res)=>{
+    //             console.log('Room enter!');
+    //             setRoomName(`https://breeze.r-e.kr/room_chat/${res.data.name}/`);
+    //             console.log(res.data.name);
+    //             console.log(roomName);
+    //             // navigate(`/chat/${roomId}`); 각 채팅방으로 이동
+    //         })
+    //         .catch((e)=>{
+    //             console.log('Cannot Enter!');
+    //             console.log(e);
+    //         });
+    // };
 
     return (
         <EveryChatBox>
@@ -137,7 +139,7 @@ const CardList = (props) => {//cardList -> 각 채팅방 카드 sorting/ map으�
                         {/* <EachChatRank>{++rankCount}</EachChatRank> */}
                         <EachChatLink src={ChatImage} alt={eachData.name}></EachChatLink>
                         <EachChatName>{eachData.name}</EachChatName>
-                        <EachChatButton onClick={()=>eachChatClick(eachData.id)}>채팅방 입장하기</EachChatButton>
+                        <EachChatButton onClick={()=>{window.location.href="https://breeze.r-e.kr/room_chat/ds/"}}>채팅방 입장하기</EachChatButton><a href={roomName}></a>
                     </EachChatBox>
                 ))
             }

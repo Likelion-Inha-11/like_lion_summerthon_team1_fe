@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import breeze from "./breeze.png";
 
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
@@ -17,19 +17,20 @@ const BreezeImgBox = styled.div`
 `;
 
 const BreezeImg = styled.img`
-  width: 20rem;
+  width: 10rem;
   height: auto;
 `;
 
 const SignupTextBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 20rem;
-  `;
-
+  width: 14rem;
+  padding-left : 2rem;
+  padding-top : 1rem;
+`
 const SignupContainer = styled.div`
   display: flex;
-  margin-top: -3rem;
+  margin-top: 2rem;
   flex-direction: column;
   align-items: center;
 `;
@@ -49,7 +50,7 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 0rem 1rem 6.5rem;
 `;
 
 const IdBox = styled.div`
@@ -85,22 +86,24 @@ const PasswordText = styled.p`
   font-size: 0.7rem;
   margin: 0.2rem;
   color: gray;
-  `;
+`
+
 
 const PasswordInput = styled.input`
   width: 10rem;
   height: 1.5rem;
   background-color: #d2ebf9;
   border-radius: 2rem;
-  border-style: none;
-  height: 2rem;
+  background-color: #a5d7f4;
+  opacity: 0.5;
   padding-left: 1rem;
-  box-shadow: 0rem 0.3rem 0.3rem gray;
+  border-style: none;
+  box-shadow: 0rem 0.2rem 0.3rem gray;
 `;
 
 const ButtonBox = styled.div`
   display: flex;
-  margin-top: 3rem;
+  margin-top: 1rem;
   width: 14rem;
   height: 3rem;
   /* background-color: coral; */
@@ -168,13 +171,12 @@ const SignupPage = (props) => {
       alert("비밀번호를 입력하세요.");
       return;
     }
-    // ${process.env.REACT_APP_API}
 
     axios
-      .post(`https://breeze.r-e.kr/signup/`, {
+      .post(`${process.env.REACT_APP_API}/signup/`, {
         // 입력된 userID 와 password 정보를 post로 넘겨주는 코드
         userID: Id,
-        password: Password
+        password: Password,
       })
       .then((res) => {
         console.log(Id); // 제대로 작동하는 정보 넘겨줬는지 확인하는 코드 (ID check)
@@ -190,12 +192,12 @@ const SignupPage = (props) => {
       });
   }
 
-  // function BtnClick2() {
-  //   setPassword("");
-  //   setID("");
-  //   alert("회원가입이 취소되었습니다.");
-  //   navigate(`/login`);
-  // }
+  function BtnClick2() {
+    setPassword("");
+    setID("");
+    alert("회원가입이 취소되었습니다.");
+    navigate(`/login`);
+  }
 
   return (
     <>
@@ -214,10 +216,10 @@ const SignupPage = (props) => {
           <IdBox>
             <IdText>아이디 입력</IdText>
             <IdInput
-              placeholder="Id"
-              type="text"
-              onChange={insertId}
-              value={Id}
+            placeholder="Id"
+            type="text"
+            onChange={insertId}
+            value={Id}
             ></IdInput>
           </IdBox>
           <PasswordBox>
@@ -230,6 +232,7 @@ const SignupPage = (props) => {
             ></PasswordInput>
           </PasswordBox>
         </InputBox>
+
         <ButtonBox>
           <CompleteButton>
             <CompleteButtonText onClick={BtnClick}>
@@ -237,7 +240,7 @@ const SignupPage = (props) => {
             </CompleteButtonText>
           </CompleteButton>
           <CancelButton>
-            <CancelButtonText>가입 취소</CancelButtonText>
+            <CancelButtonText onClick={()=>navigate(-1)}>가입 취소</CancelButtonText>
           </CancelButton>
         </ButtonBox>
         <SocialLoginText>
