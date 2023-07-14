@@ -9,7 +9,7 @@ import styled from "styled-components";
 import UserTestImage from "./components/MyPage/UserTestImage.jpg";
 import { useParams } from "react-router-dom";
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
@@ -47,12 +47,12 @@ const MyPage = () => {
       <MyHeader UserInfo={UserInfo} UserImage={UserTestImage}></MyHeader>
       <MyPageBody UserInfo={UserInfo}></MyPageBody>
       <BottomBar IdOfUser={Id3}></BottomBar>
-
       <BreezeImgBox>
         <BreezeImg src={breeze}></BreezeImg>
       </BreezeImgBox>
     </div>
   );
+
 };
 
 export default MyPage;

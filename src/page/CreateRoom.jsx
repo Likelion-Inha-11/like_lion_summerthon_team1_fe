@@ -7,7 +7,7 @@ import { useNavigate, Navigate, useParams } from "react-router-dom";
 import MyHeader from "./components/MyPage/MyHeader";
 import UserTestImage from "./components/MyPage/UserTestImage.jpg";
 import { UserImage } from "./components/MyPage/MyHeader";
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
